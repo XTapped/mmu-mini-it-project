@@ -5,7 +5,7 @@ class MMUCenter:
         window = Tk()
         window.title("MMU Center")
         # create a canvas
-        canvas = Canvas(window, width = 314, height = 98)
+        canvas = Canvas(window, width = 800, height = 500)
         canvas.pack(pady=40)
         # create a photoimage object
         image1 = PhotoImage(file = "mmu.png")
