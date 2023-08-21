@@ -1,6 +1,5 @@
 # import tkinter
 from tkinter import * 
-# make a class for an png logo called MMUCenter centered in the middle of a window with dimensions of 314 x 98 and fits perfectly in the window for a course registration system 
 class MMUCenter:
     def __init__(self):
         window = Tk()
