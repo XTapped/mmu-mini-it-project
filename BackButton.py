@@ -10,9 +10,8 @@ class BackButton:
         myFrame = Frame(back_button)
         myFrame.pack()
         
-        self.my_img = Image.open("back_arrow.png")  
-        self.my_img = self.my_img.resize((50, 50)) 
-        
+        self.my_img = Image.open("backarrow.png")  
+         
         self.my_img = ImageTk.PhotoImage(self.my_img)
         self.my_label = Label(image = self.my_img)
 
@@ -21,7 +20,7 @@ class BackButton:
         self.my_button.place(x=5, y=10)
 
     def clicker(self):
-        print("You clicked the image button!") 
+        pass
 
 
 back = BackButton(root)
