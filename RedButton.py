@@ -26,7 +26,7 @@ class RedButton:
                                   borderwidth=0, 
                                   relief="flat",
                                   activebackground="red",
-                                  activeforeground="white",
+                                  activeforeground="black",
                                   command=self.clicker, )
 
         self.red_button.pack()
