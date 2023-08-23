@@ -1,9 +1,5 @@
 from tkinter import *
 
-root = Tk()
-root.title = "BackButton"
-root.geometry("200x300")
-
 
 class BackButton:
     def __init__(self, back_button):
@@ -19,8 +15,3 @@ class BackButton:
 
     def clicker(self):
         pass
-
-
-back = BackButton(root)
-
-root.mainloop()
