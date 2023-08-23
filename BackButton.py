@@ -3,17 +3,17 @@ from tkinter import *
 
 class BackButton:
     def __init__(self, root, back_frame):
-        self.back_frame = back_frame
-        self.root = root
+        self._back_frame = back_frame
+        self._root = root
 
-        self.img = PhotoImage(file="assets/backarrow.png")
-        self.button = Button(root, image=self.img, command=self.back, borderwidth=0)
+        self._img = PhotoImage(file="assets/backarrow.png")
+        self._button = Button(root, image=self._img, command=self.back, borderwidth=0)
 
     def pack(self):
-        self.button.pack()
-        self.button.place(x=5, y=10)
+        self._button.pack()
+        self._button.place(x=5, y=10)
 
     def back(self):
-        self.button.pack_forget()
-        self.root.pack_forget()
-        self.back_frame.pack()
+        self._button.pack_forget()
+        self._root.pack_forget()
+        self._back_frame.pack()
