@@ -1,20 +1,18 @@
-# import tkinter
-from tkinter import * 
+from tkinter import *
+
+
 class MMUCenter:
-    def __init__(self):
-        window = Tk()
-        window.title("MMU Center")
-        # create a canvas
-        canvas = Canvas(window, width = 800, height = 500)
-        canvas.pack(pady=40)
-        # create a photoimage object
-        image1 = PhotoImage(file = "mmu.png")
-        # create a label in the canvas
-        canvas.create_image(160, 49, image = image1)
-        # run the mainloop
-        window.mainloop()
-# call the class
-MMUCenter()
-#
+    def __init__(self, frame):
+        self.frame = frame
+        self.image = PhotoImage(file="mmu.png")
+        self.padding = 40
 
+        self.canvas = Canvas(
+            self.frame, width=self.image.width(), height=self.image.height()
+        )
+        self.canvas.create_image(
+            self.image.width() / 2, self.image.height() / 2, image=self.image
+        )
 
+    def pack(self, **kwargs):
+        self.canvas.pack(pady=self.padding, **kwargs)
