@@ -4,7 +4,7 @@ from tkinter import *
 class MMUCenter:
     def __init__(self, frame):
         self.frame = frame
-        self.image = PhotoImage(file="mmu.png")
+        self.image = PhotoImage(file="assets/mmu.png")
         self.padding = 40
 
         self.canvas = Canvas(
