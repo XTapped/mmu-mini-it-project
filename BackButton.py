@@ -13,6 +13,7 @@ class BackButton:
             back_button, image=self.my_img, command=self.clicker, borderwidth=0
         )
 
+    def pack(self):
         self.my_button.pack()
         self.my_button.place(x=5, y=10)
 
