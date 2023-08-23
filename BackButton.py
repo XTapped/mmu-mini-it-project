@@ -6,7 +6,7 @@ class BackButton:
         self.back_frame = back_frame
         self.root = root
 
-        self.img = PhotoImage(file="backarrow.png")
+        self.img = PhotoImage(file="assets/backarrow.png")
         self.button = Button(root, image=self.img, command=self.back, borderwidth=0)
 
     def pack(self):
