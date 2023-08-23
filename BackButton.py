@@ -2,11 +2,11 @@ from tkinter import *
 
 
 class BackButton:
-    def __init__(self, back_button):
+    def __init__(self, root):
         self.my_img = PhotoImage(file="backarrow.png")
 
         self.my_button = Button(
-            back_button, image=self.my_img, command=self.clicker, borderwidth=0
+            root, image=self.my_img, command=self.clicker, borderwidth=0
         )
 
     def pack(self):
