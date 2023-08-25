@@ -1,38 +1,38 @@
 from tkinter import *
+from typing import *
 
-root = Tk()
+class WhiteButton(Frame):
+    """
+    A white button with black text. This class extends tk.Frame()
 
-#Create class for whitebutton
-class WhiteButton:
-    def __init__(self,root,label,size,x_pos, y_pos):
-        
-        #Button Border Atribuites
-        self.button_frame = Frame(
+    Args:
+        root (Tk): The root window.
+        text (str): The text to display on the button.
+        command (Optional[Callable], optional): The function to call when the button is clicked. Defaults to None.
+        width (int, optional): The width of the button. Defaults to 10.
+    """
+
+    def __init__(
+        self, root: Tk, text: str, command: Optional[Callable] = None, width: int = 10
+    ):
+        super().__init__(
             root,
             bg="black",
             highlightbackground="black",
             highlightcolor="black",
-            highlightthickness=1
+            highlightthickness=1,
         )
 
-        #Atribuites of button
         self.white_button = Button(
-            self.button_frame,
-            text=label, 
+            self,
+            text=text,
             font="inter",
-            command=self.clicker, 
+            command=command,
             bg="white",
             fg="black",
-            width=size,
+            width=width,
             borderwidth=0,
-            relief="flat")
-                                  
-        self.white_button.pack()
-        self.button_frame.place(x=x_pos, y=y_pos)
-        
-    def clicker(self): 
-        pass
+            relief="flat",
+        )
 
-#Specifying what text size and possition should the button be 
-wb = WhiteButton(root,"TEXT","10", x_pos=3, y_pos=5)
-root.mainloop()
+        self.white_button.pack()

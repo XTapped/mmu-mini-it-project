@@ -1,31 +1,18 @@
-from tkinter import*
-from PIL import ImageTk,Image
+from tkinter import *
 
-root=Tk()
-root.title="BackButton"
-root.geometry("200x300")
 
 class BackButton:
-    def __init__(self,back_button):
-        myFrame = Frame(back_button)
-        myFrame.pack()
-        
-        self.my_img = Image.open("backarrow.png")  
-         
-        self.my_img = ImageTk.PhotoImage(self.my_img)
-        self.my_label = Label(image = self.my_img)
+    def __init__(self, root, back_frame):
+        self._back_frame = back_frame
+        self._root = root
+        self._img = PhotoImage(file="assets/backarrow.png")
+        self._button = Button(root, image=self._img, command=self.back, borderwidth=0)
 
-        self.my_button = Button(back_button, 
-                                image=self.my_img, 
-                                command=self.clicker, 
-                                borderwidth=0)
-        self.my_button.pack()
-        self.my_button.place(x=5, y=10)
+    def pack(self):
+        self._button.pack()
+        self._button.place(x=5, y=10)
 
-    def clicker(self):
-        pass
-
-
-back = BackButton(root)
-
-root.mainloop()
+    def back(self):
+        self._button.pack_forget()
+        self._root.pack_forget()
+        self._back_frame.pack()
