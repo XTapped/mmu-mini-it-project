@@ -1,18 +1,45 @@
 from tkinter import *
+from typing import *
 
 
-class BackButton:
-    def __init__(self, root, back_frame):
-        self._back_frame = back_frame
-        self._root = root
+class BackButton(Button):
+    """
+    A back button that returns to the previous frame when clicked. This class inherits from tk.Button.
+
+    Args:
+        root (Tk): The root window.
+        back_frame (Frame): The frame to return to when the button is clicked.
+    """
+
+    def __init__(self, root: Tk, back_frame: Frame) -> None:
         self._img = PhotoImage(file="assets/backarrow.png")
-        self._button = Button(root, image=self._img, command=self.back, borderwidth=0)
+        self._back_frame = back_frame
+        super().__init__(root, image=self._img, command=self._back, borderwidth=0)
+
+    def _back(self):
+        self.master.pack_forget()
+        self._back_frame.pack()
 
     def pack(self):
-        self._button.pack()
-        self._button.place(x=5, y=10)
+        super().pack()
+        self.place(x=5, y=10)
 
-    def back(self):
-        self._button.pack_forget()
-        self._root.pack_forget()
-        self._back_frame.pack()
+
+# if __name__ == "__main__":
+#     root = Tk()
+#     root.geometry("800x500")
+#     root.title("BackButton Test")
+#     root.resizable(False, False)
+
+#     frame1 = Frame(root, width=800, height=500, bg="red")
+#     frame1.pack()
+#     front_button = Button(
+#         frame1, text="Front", command=lambda: [frame1.pack_forget(), frame2.pack()]
+#     )
+#     front_button.pack()
+
+#     frame2 = Frame(root, width=800, height=500, bg="blue")
+#     back_button = BackButton(frame2, frame1)
+#     back_button.pack()
+
+#     root.mainloop()
