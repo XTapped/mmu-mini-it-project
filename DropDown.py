@@ -9,16 +9,18 @@ class DropDown(tk.Frame):
 
     Args:
         root (Tk): The root window of the program.
-        label_text (str): The text to be displayed on the label.
         values (List[str]): The values to be displayed in the dropdown menu.
+        label (bool, optional): Whether the dropdown menu should have a label. Defaults to False.
+        label_text (str, optional): The text to be displayed on the label. Defaults to "Label".
         width (int, optional): The width of the dropdown menu. Defaults to 20.
     """
 
     def __init__(
         self,
         root: tk.Tk,
-        label_text: str,
         values: List[str],
+        label: bool = False,
+        label_text: str = "Label",
         width: int = 20,
     ):
         super().__init__(root)
@@ -33,7 +35,9 @@ class DropDown(tk.Frame):
             state="readonly",
         )
 
-        self._label.pack(anchor=tk.W, side=tk.TOP)
+        if label:
+            self._label.pack(anchor=tk.W, side=tk.TOP)
+
         self._combobox.pack()
 
     def get(self) -> str:
@@ -48,7 +52,7 @@ class DropDown(tk.Frame):
         return self._combobox.get()
 
 
-# test code
+# # test code
 # if __name__ == "__main__":
 #     root = tk.Tk()
 #     root.geometry("800x500")
@@ -58,7 +62,7 @@ class DropDown(tk.Frame):
 #     frame = tk.Frame(root, width=800, height=500)
 #     frame.pack()
 
-#     drop_down = DropDown(frame, "Test", ["Test1", "Test2", "Test3"])
+#     drop_down = DropDown(frame, ["Option 1", "Option 2", "Option 3"], True)
 #     drop_down.pack()
 
 #     # test get()
