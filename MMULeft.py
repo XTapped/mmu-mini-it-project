@@ -1,8 +1,8 @@
-from tkinter import *
+import tkinter as tk
 from typing import *
 
 
-class MMUCenter(Canvas):
+class MMUCenter(tk.Canvas):
     """
     A picture of the MMU logo centered in the middle of the screen. This class inherits from tk.Canvas.
 
@@ -10,8 +10,8 @@ class MMUCenter(Canvas):
         root (Tk): The root window.
     """
 
-    def __init__(self, root: Tk):
-        self._image = PhotoImage(file="assets/mmuleft.png")
+    def __init__(self, root: tk.Tk):
+        self._image = tk.PhotoImage(file="assets/mmuleft.png")
         super().__init__(root, width=self._image.width(), height=self._image.height())
 
         self.create_image(

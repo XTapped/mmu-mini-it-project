@@ -1,8 +1,8 @@
-from tkinter import *
+import tkinter as tk
 from typing import *
 
 
-class BackButton(Button):
+class BackButton(tk.Button):
     """
     A back button that returns to the previous frame when clicked. This class inherits from tk.Button.
 
@@ -11,8 +11,8 @@ class BackButton(Button):
         back_frame (Frame): The frame to return to when the button is clicked.
     """
 
-    def __init__(self, root: Tk, back_frame: Frame) -> None:
-        self._img = PhotoImage(file="assets/backarrow.png")
+    def __init__(self, root: tk.Tk, back_frame: tk.Frame) -> None:
+        self._img = tk.PhotoImage(file="assets/backarrow.png")
         self._back_frame = back_frame
         super().__init__(root, image=self._img, command=self._back, borderwidth=0)
 

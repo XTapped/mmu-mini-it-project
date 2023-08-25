@@ -1,7 +1,8 @@
-from tkinter import *
+import tkinter as tk
 from typing import *
 
-class WhiteButton(Frame):
+
+class WhiteButton(tk.Frame):
     """
     A white button with black text. This class extends tk.Frame()
 
@@ -13,7 +14,11 @@ class WhiteButton(Frame):
     """
 
     def __init__(
-        self, root: Tk, text: str, command: Optional[Callable] = None, width: int = 10
+        self,
+        root: tk.Tk,
+        text: str,
+        command: Optional[Callable] = None,
+        width: int = 10,
     ):
         super().__init__(
             root,
@@ -23,7 +28,7 @@ class WhiteButton(Frame):
             highlightthickness=1,
         )
 
-        self.white_button = Button(
+        self.white_button = tk.Button(
             self,
             text=text,
             font="inter",

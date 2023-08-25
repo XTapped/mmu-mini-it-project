@@ -1,8 +1,8 @@
 from typing import *
-from tkinter import *
+import tkinter as tk
 
 
-class PasswordEntry(Frame):
+class PasswordEntry(tk.Frame):
     """
     Default password entry field used in the program. You should use get() to fetch text typed into the entry. This class inherits from tk.Frame.
 
@@ -11,23 +11,23 @@ class PasswordEntry(Frame):
         width (int, optional): The width of the entry field. Defaults to 20.
     """
 
-    def __init__(self, root: Tk, width: int = 20):
+    def __init__(self, root: tk.Tk, width: int = 20):
         super().__init__(root)
 
-        self._label = Label(self, text="Password", font=("Inter", 16))
-        self._entry = Entry(
+        self._label = tk.Label(self, text="Password", font=("Inter", 16))
+        self._entry = tk.Entry(
             self,
             bg="#D9D9D9",
             font=("Inter", 16),
             bd=1,
             highlightthickness=1,
             highlightbackground="black",
-            relief=FLAT,
+            relief=tk.FLAT,
             width=width,
             show="•",
         )
 
-        self._label.pack(anchor=W, side=TOP)
+        self._label.pack(anchor=tk.W, side=tk.TOP)
         self._entry.pack()
 
     def get(self) -> str:

@@ -1,8 +1,8 @@
-from tkinter import *
+import tkinter as tk
 from typing import *
 
 
-class RedButton(Frame):
+class RedButton(tk.Frame):
     """
     A red button with white text. This class extends tk.Frame()
 
@@ -14,7 +14,11 @@ class RedButton(Frame):
     """
 
     def __init__(
-        self, root: Tk, text: str, command: Optional[Callable] = None, width: int = 10
+        self,
+        root: tk.Tk,
+        text: str,
+        command: Optional[Callable] = None,
+        width: int = 10,
     ):
         super().__init__(
             root,
@@ -24,7 +28,7 @@ class RedButton(Frame):
             highlightthickness=1,
         )
 
-        self.red_button = Button(
+        self.red_button = tk.Button(
             self,
             text=text,
             font="inter",

@@ -1,10 +1,10 @@
 from typing import *
-from tkinter import *
+import tkinter as tk
 import random
 import string
 
 
-class TextEntry(Frame):
+class TextEntry(tk.Frame):
     """
     Default text entry field used in the program. You should use get() to fetch text typed into the entry. This class inherits from tk.Frame.
 
@@ -19,7 +19,7 @@ class TextEntry(Frame):
 
     def __init__(
         self,
-        root: Tk,
+        root: tk.Tk,
         label_text: str,
         width: int = 20,
         regen: bool = False,
@@ -29,42 +29,42 @@ class TextEntry(Frame):
         super().__init__(root)
 
         self._disabled = disabled
-        self._label = Label(self, text=label_text, font=("Inter", 16))
-        self._entry = Entry(
+        self._label = tk.Label(self, text=label_text, font=("Inter", 16))
+        self._entry = tk.Entry(
             self,
             bg="#D9D9D9",
             font=("Inter", 16),
             bd=1,
             highlightthickness=1,
             highlightbackground="black",
-            relief=FLAT,
+            relief=tk.FLAT,
             width=width,
-            state=DISABLED if self._disabled else NORMAL,
+            state=tk.DISABLED if self._disabled else tk.NORMAL,
         )
 
-        self._regenerate_icon = PhotoImage(file="assets/regenerate_icon.png")
-        self._regenerate = Label(
+        self._regenerate_icon = tk.PhotoImage(file="assets/regenerate_icon.png")
+        self._regenerate = tk.Label(
             self,
             text="Regenerate",
             font=("Inter 13 underline"),
             fg="#363636",
             cursor="hand2",
             image=self._regenerate_icon,
-            compound=LEFT,
+            compound=tk.LEFT,
         )
 
-        self._copy_icon = PhotoImage(file="assets/copy_icon.png")
-        self._copy = Label(
+        self._copy_icon = tk.PhotoImage(file="assets/copy_icon.png")
+        self._copy = tk.Label(
             self,
             text="Copy",
             font=("Inter 13 underline"),
             fg="#363636",
             cursor="hand2",
             image=self._copy_icon,
-            compound=LEFT,
+            compound=tk.LEFT,
         )
 
-        self._label.pack(anchor=W, side=TOP)
+        self._label.pack(anchor=tk.W, side=tk.TOP)
         self._entry.pack()
 
         if regen:
@@ -74,12 +74,12 @@ class TextEntry(Frame):
 
     def _put_password(self, event):
         if self._disabled:
-            self._entry.config(state=NORMAL)
-            self._entry.delete(0, END)
+            self._entry.config(state=tk.NORMAL)
+            self._entry.delete(0, tk.END)
             self._entry.insert(0, self._generate_random_password())
-            self._entry.config(state=DISABLED)
+            self._entry.config(state=tk.DISABLED)
         else:
-            self._entry.delete(0, END)
+            self._entry.delete(0, tk.END)
             self._entry.insert(0, self._generate_random_password())
 
     def _generate_random_password(self):
@@ -92,20 +92,20 @@ class TextEntry(Frame):
 
     def _copy_password(self, event):
         if self._disabled:
-            self._entry.config(state=NORMAL)
-            self._entry.select_range(0, END)
+            self._entry.config(state=tk.NORMAL)
+            self._entry.select_range(0, tk.END)
             self._entry.event_generate("<<Copy>>")
-            self._entry.config(state=DISABLED)
+            self._entry.config(state=tk.DISABLED)
         else:
-            self._entry.select_range(0, END)
+            self._entry.select_range(0, tk.END)
             self._entry.event_generate("<<Copy>>")
 
     def _display_regenerate_button(self):
-        self._regenerate.pack(anchor=W)
+        self._regenerate.pack(anchor=tk.W)
         self._regenerate.bind("<Button-1>", self._put_password)
 
     def _display_copy_button(self):
-        self._copy.pack(anchor=W)
+        self._copy.pack(anchor=tk.W)
         self._copy.bind("<Button-1>", self._copy_password)
 
     def get(self) -> str:
