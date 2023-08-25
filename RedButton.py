@@ -1,9 +1,10 @@
 from tkinter import *
 from typing import *
 
-class WhiteButton(Frame):
+
+class RedButton(Frame):
     """
-    A white button with black text. This class extends tk.Frame()
+    A red button with white text. This class extends tk.Frame()
 
     Args:
         root (Tk): The root window.
@@ -23,16 +24,18 @@ class WhiteButton(Frame):
             highlightthickness=1,
         )
 
-        self.white_button = Button(
+        self.red_button = Button(
             self,
             text=text,
             font="inter",
             command=command,
-            bg="white",
-            fg="black",
+            bg="red",
+            fg="white",
             width=width,
             borderwidth=0,
             relief="flat",
+            activebackground="red",
+            activeforeground="black",
         )
 
-        self.white_button.pack()
+        self.red_button.pack()

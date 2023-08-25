@@ -5,7 +5,6 @@ class BackButton:
     def __init__(self, root, back_frame):
         self._back_frame = back_frame
         self._root = root
-
         self._img = PhotoImage(file="assets/backarrow.png")
         self._button = Button(root, image=self._img, command=self.back, borderwidth=0)
 
