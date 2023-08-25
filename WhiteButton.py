@@ -1,10 +1,11 @@
 from tkinter import *
-
-root = Tk()
+from typing import *
 
 
 class WhiteButton(Frame):
-    def __init__(self, root, text, width=10):
+    def __init__(
+        self, root: Tk, text: str, command: Optional[Callable] = None, width: int = 10
+    ):
         super().__init__(
             root,
             bg="black",
@@ -17,7 +18,7 @@ class WhiteButton(Frame):
             self,
             text=text,
             font="inter",
-            command=self.command,
+            command=command,
             bg="white",
             fg="black",
             width=width,
@@ -26,11 +27,3 @@ class WhiteButton(Frame):
         )
 
         self.white_button.pack()
-
-    def command(self):
-        pass
-
-
-wb = WhiteButton(root, "Hello World!")
-wb.pack()
-root.mainloop()
