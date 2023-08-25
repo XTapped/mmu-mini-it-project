@@ -6,7 +6,7 @@ import string
 
 class TextEntry(Frame):
     """
-    Default text entry field used in the program. This class inherits from tk.Frame.
+    Default text entry field used in the program. You should use get() to fetch text typed into the entry. This class inherits from tk.Frame.
 
     Args:
         root (Tk): The root window of the program.
@@ -58,7 +58,7 @@ class TextEntry(Frame):
         self._entry.pack()
 
         if regen_and_copy:
-            self.display_regenerate_and_copy()
+            self._display_regenerate_and_copy()
 
     def _put_password(self, event):
         self._entry.delete(0, END)
@@ -76,8 +76,17 @@ class TextEntry(Frame):
         self._entry.select_range(0, END)
         self._entry.event_generate("<<Copy>>")
 
-    def display_regenerate_and_copy(self):
+    def _display_regenerate_and_copy(self):
         self._regenerate.pack(anchor=W)
         self._regenerate.bind("<Button-1>", self._put_password)
         self._copy.pack(anchor=W)
         self._copy.bind("<Button-1>", self._copy_password)
+
+    def get(self) -> str:
+        """
+        Get the text from the entry field.
+
+        Returns:
+            str: The text from the entry field.
+        """
+        return self._entry.get()
