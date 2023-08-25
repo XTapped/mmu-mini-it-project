@@ -39,12 +39,11 @@ class DropDown(tk.Frame):
             self._label.pack(anchor=tk.W, side=tk.TOP)
 
         self._combobox.pack()
+        self._combobox.current(0)
 
     def get(self) -> str:
         """
         Get the selected value from the dropdown menu.
-
-        Caution: This method will return an empty string if no value is selected which happens when the window is first opened.
 
         Returns:
             str: The selected value from the dropdown menu.
