@@ -12,7 +12,8 @@ class TextEntry(Frame):
         root (Tk): The root window of the program.
         label_text (str): The text to be displayed on the label.
         width (int, optional): The width of the entry field. Defaults to 20.
-        regen_and_copy (bool, optional): Whether to display the regenerate and copy buttons. Useful for password fields. Defaults to False.
+        regen (bool, optional): Whether the entry field should have a button to regenerate the text. Defaults to False.
+        copy (bool, optional): Whether the entry field should have a button to copy the text. Defaults to False.
         disabled (bool, optional): Whether the entry field should be greyed out and unclickable. Defaults to False.
     """
 
@@ -21,7 +22,8 @@ class TextEntry(Frame):
         root: Tk,
         label_text: str,
         width: int = 20,
-        regen_and_copy: bool = False,
+        regen: bool = False,
+        copy: bool = False,
         disabled: bool = False,
     ):
         super().__init__(root)
@@ -65,8 +67,10 @@ class TextEntry(Frame):
         self._label.pack(anchor=W, side=TOP)
         self._entry.pack()
 
-        if regen_and_copy:
-            self._display_regenerate_and_copy()
+        if regen:
+            self._display_regenerate_button()
+        if copy:
+            self._display_copy_button()
 
     def _put_password(self, event):
         if self._disabled:
@@ -96,9 +100,11 @@ class TextEntry(Frame):
             self._entry.select_range(0, END)
             self._entry.event_generate("<<Copy>>")
 
-    def _display_regenerate_and_copy(self):
+    def _display_regenerate_button(self):
         self._regenerate.pack(anchor=W)
         self._regenerate.bind("<Button-1>", self._put_password)
+
+    def _display_copy_button(self):
         self._copy.pack(anchor=W)
         self._copy.bind("<Button-1>", self._copy_password)
 
