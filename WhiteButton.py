@@ -3,6 +3,16 @@ from typing import *
 
 
 class WhiteButton(Frame):
+    """
+    A white button with black text. This class extends tk.Frame()
+
+    Args:
+        root (Tk): The root window.
+        text (str): The text to display on the button.
+        command (Optional[Callable], optional): The function to call when the button is clicked. Defaults to None.
+        width (int, optional): The width of the button. Defaults to 10.
+    """
+
     def __init__(
         self, root: Tk, text: str, command: Optional[Callable] = None, width: int = 10
     ):
