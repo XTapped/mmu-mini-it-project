@@ -3,9 +3,9 @@ from tkinter import *
 root = Tk()
 
 
-class WhiteButton:
-    def __init__(self, root, text, width, x_pos, y_pos):
-        self.button_frame = Frame(
+class WhiteButton(Frame):
+    def __init__(self, root, text, width=10):
+        super().__init__(
             root,
             bg="black",
             highlightbackground="black",
@@ -14,10 +14,10 @@ class WhiteButton:
         )
 
         self.white_button = Button(
-            self.button_frame,
+            self,
             text=text,
             font="inter",
-            command=self.clicker,
+            command=self.command,
             bg="white",
             fg="black",
             width=width,
@@ -26,11 +26,11 @@ class WhiteButton:
         )
 
         self.white_button.pack()
-        self.button_frame.place(x=x_pos, y=y_pos)
 
-    def clicker(self):
+    def command(self):
         pass
 
 
-wb = WhiteButton(root, "TEXT", "10", x_pos=3, y_pos=5)
+wb = WhiteButton(root, "Hello World!")
+wb.pack()
 root.mainloop()
