@@ -4,7 +4,7 @@ root = Tk()
 
 
 class WhiteButton:
-    def __init__(self, root, label, size, x_pos, y_pos):
+    def __init__(self, root, label, width, x_pos, y_pos):
         self.button_frame = Frame(
             root,
             bg="black",
@@ -20,7 +20,7 @@ class WhiteButton:
             command=self.clicker,
             bg="white",
             fg="black",
-            width=size,
+            width=width,
             borderwidth=0,
             relief="flat",
         )
