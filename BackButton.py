@@ -24,6 +24,10 @@ class BackButton(tk.Button):
         super().pack()
         self.place(x=5, y=10)
 
+    def grid(self):
+        super().grid()
+        self.place(x=5, y=10)
+
 
 # if __name__ == "__main__":
 #     root = Tk()

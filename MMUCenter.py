@@ -21,3 +21,6 @@ class MMUCenter(tk.Canvas):
 
     def pack(self):
         super().pack(pady=self._padding)
+
+    def grid(self):
+        super().grid(pady=self._padding)

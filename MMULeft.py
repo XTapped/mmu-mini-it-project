@@ -22,6 +22,10 @@ class MMUCenter(tk.Canvas):
         super().pack()
         super().place(x=48, y=80)
 
+    def grid(self):
+        super().grid()
+        super().place(x=48, y=80)
+
 
 # TEST CODE
 # if __name__ == "__main__":
