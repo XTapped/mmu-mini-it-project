@@ -119,16 +119,16 @@ class TextEntry(tk.Frame):
 
 
 # test code
-# if __name__ == "__main__":
-#     root = Tk()
-#     root.geometry("800x500")
-#     root.title("TextEntry Test")
-#     root.resizable(False, False)
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.geometry("800x500")
+    root.title("TextEntry Test")
+    root.resizable(False, False)
 
-#     frame = Frame(root, width=800, height=500)
-#     frame.pack()
+    frame = tk.Frame(root, width=800, height=500)
+    frame.pack()
 
-#     text_entry = TextEntry(frame, "TextEntry Test", regen_and_copy=True, disabled=True)
-#     text_entry.pack()
+    text_entry = TextEntry(frame, "TextEntry Test")
+    text_entry.pack()
 
-#     root.mainloop()
+    root.mainloop()
