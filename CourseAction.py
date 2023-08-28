@@ -25,11 +25,11 @@ heading3.pack()
 heading3.place(x=40, y=149)
 
 create_course = WhiteButton(root, "Create Course", None, 17)
-create_course.pack(anchor="nw")
+create_course.pack(anchor="w")
 create_course.place(x=48, y=200)
 
 Update_Delete_course = WhiteButton(root, "Update/Delete Course", None, 17)
-Update_Delete_course.pack()
+Update_Delete_course.pack(anchor="w")
 Update_Delete_course.place(x=48, y=250)
 
 
