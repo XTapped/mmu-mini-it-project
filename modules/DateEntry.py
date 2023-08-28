@@ -4,6 +4,19 @@ import DropDown as lib
 
 
 class DateEntry(tk.Frame):
+    """
+    Default date entry field used in the program. You should use get() to fetch the selected dates. This class inherits from tk.Frame.
+
+    Examples:
+        >>> date = DateEntry(root)
+        >>> date.pack()
+        >>> # User enters a day of Monday, start hour of 0800, and end hour of 1000
+        >>> date.get() # Output: ('Monday', '0800', '1000')
+
+    Args:
+        root (Tk): The root window of the program.
+    """
+
     def __init__(
         self,
         root: tk.Tk,
