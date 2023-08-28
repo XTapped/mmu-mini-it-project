@@ -2,7 +2,7 @@ import tkinter as tk
 from typing import *
 
 
-class MMUCenter(tk.Canvas):
+class MMULeft(tk.Canvas):
     """
     A picture of the MMU logo centered in the middle of the screen. This class inherits from tk.Canvas.
 
