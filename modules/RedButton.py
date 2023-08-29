@@ -12,6 +12,7 @@ class RedButton(tk.Frame):
         command (Optional[Callable], optional): The function to call when the button is clicked. Defaults to None.
         width (int, optional): The width of the button. Defaults to 10.
         height (int, optional): The height of the button. Defaults to 1.
+        anchor (Literal["n", "ne", "e", "se", "s", "sw", "w", "nw", "center"], optional): The alignment of the text in the button. Defaults to "center".
     """
 
     def __init__(
@@ -21,6 +22,9 @@ class RedButton(tk.Frame):
         command: Optional[Callable] = None,
         width: int = 10,
         height: int = 1,
+        anchor: Literal[
+            "n", "ne", "e", "se", "s", "sw", "w", "nw", "center"
+        ] = "center",
     ):
         super().__init__(
             root,
@@ -43,6 +47,7 @@ class RedButton(tk.Frame):
             activebackground="red",
             activeforeground="black",
             height=height,
+            anchor=anchor,
         )
 
         self.red_button.pack()
