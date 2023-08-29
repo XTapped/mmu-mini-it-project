@@ -20,7 +20,7 @@ class WhiteButton(tk.Frame):
         text: str,
         command: Optional[Callable] = None,
         width: int = 10,
-        height: int = 10,
+        height: int = 1,
     ):
         super().__init__(
             root,
