@@ -9,7 +9,7 @@ from modules.WhiteButton import WhiteButton
 class CourseAction(tk.Frame):
     def __init__(self, root: tk.Tk):
         super().__init__(root)
-        root.title("Student Course Action")
+        root.title("Course Action")
         root.geometry("800x500")
         root.resizable(False, False)
 
