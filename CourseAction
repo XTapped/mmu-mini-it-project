@@ -23,28 +23,28 @@ class CourseAction(tk.Frame):
         heading3.pack()
         heading3.place(x=48, y=149)
 
-        create_course = WhiteButton(root, "Create Course", None, 17)
+        create_course = WhiteButton(root, "Create Course", None, 19, "2", "w")
         create_course.pack(anchor="w")
         create_course.place(x=48, y=200)
 
-        Update_Delete_course = WhiteButton(root, "Update/Delete Course", None, 17)
+        Update_Delete_course = WhiteButton(root, "Update/Delete Course", None, 19, "2", "w")
         Update_Delete_course.pack()
         Update_Delete_course.place(x=48, y=260)
 
 
 
 #TEST CODE
-# if __name__ == "__main__":
-#     root = tk.Tk()
-#     root.geometry("800x500")
-#     root.title("CourseAction Test")
-#     root.resizable(False, False)
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.geometry("800x500")
+    root.title("CourseAction Test")
+    root.resizable(False, False)
 
-#     frame = tk.Frame(root)
-#     frame.pack()
+    frame = tk.Frame(root)
+    frame.pack()
 
-#     course_action = CourseAction(root)
-#     course_action.pack()
+    course_action = CourseAction(root)
+    course_action.pack()
 
-#     root.mainloop()
+    root.mainloop()
 
