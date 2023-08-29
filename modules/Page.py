@@ -6,6 +6,7 @@ class Page(tk.Frame):
     """
     When coding a page, you should always inherit from this class. This class inherits from tk.Frame.
     This class is used to create a scrollable page.
+    Note: Make sure to call this class' construtor when inheriting. If not, the page will not be scrollable.
 
     Args:
         root (Tk): The root window of the program.
