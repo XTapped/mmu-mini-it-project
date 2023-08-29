@@ -11,6 +11,7 @@ class RedButton(tk.Frame):
         text (str): The text to display on the button.
         command (Optional[Callable], optional): The function to call when the button is clicked. Defaults to None.
         width (int, optional): The width of the button. Defaults to 10.
+        height (int, optional): The height of the button. Defaults to 10.
     """
 
     def __init__(
@@ -19,6 +20,7 @@ class RedButton(tk.Frame):
         text: str,
         command: Optional[Callable] = None,
         width: int = 10,
+        height: int = 10,
     ):
         super().__init__(
             root,
@@ -40,6 +42,7 @@ class RedButton(tk.Frame):
             relief="flat",
             activebackground="red",
             activeforeground="black",
+            height=height,
         )
 
         self.red_button.pack()
