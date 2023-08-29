@@ -16,7 +16,7 @@ class Page(tk.Frame):
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
         self.canvas.create_window((0, 0), window=self.frame, anchor="nw")
-        self.canvas.configure(yscrollpcommand=self.scrollbar.set)
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
 
         self.frame.bind("<Configure>", self._on_frame_configure)
 
