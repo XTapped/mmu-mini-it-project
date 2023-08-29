@@ -34,7 +34,7 @@ class StudentAction(tk.Frame):
         Update_Delete_course.place(x=48, y=260)
 
 
-#TEST CODE
+# TEST CODE
 if __name__ == "__main__":
     root = tk.Tk()
     root.geometry("800x500")
