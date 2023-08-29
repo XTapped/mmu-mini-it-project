@@ -3,6 +3,15 @@ from typing import *
 
 
 class Page(tk.Frame):
+    """
+    When coding a page, you should always inherit from this class. This class inherits from tk.Frame.
+    This class is used to create a scrollable page.
+
+    Args:
+        root (Tk): The root window of the program.
+        title (str, optional): The title of the page. Defaults to "Mini IT Project".
+    """
+
     def __init__(self, root: tk.Tk, title: str = "Mini IT Project", *args, **kwargs):
         super().__init__(root, *args, **kwargs)
         root.title(title)
