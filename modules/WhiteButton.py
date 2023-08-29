@@ -11,6 +11,8 @@ class WhiteButton(tk.Frame):
         text (str): The text to display on the button.
         command (Optional[Callable], optional): The function to call when the button is clicked. Defaults to None.
         width (int, optional): The width of the button. Defaults to 10.
+        height (int, optional): The height of the button. Defaults to 1.
+        anchor (Literal["n", "ne", "e", "se", "s", "sw", "w", "nw", "center"], optional): The alignment of the text in the button. Defaults to "center".
     """
 
     def __init__(
@@ -19,6 +21,10 @@ class WhiteButton(tk.Frame):
         text: str,
         command: Optional[Callable] = None,
         width: int = 10,
+        height: int = 1,
+        anchor: Literal[
+            "n", "ne", "e", "se", "s", "sw", "w", "nw", "center"
+        ] = "center",
     ):
         super().__init__(
             root,
@@ -38,6 +44,20 @@ class WhiteButton(tk.Frame):
             width=width,
             borderwidth=0,
             relief="flat",
+            height=height,
+            anchor=anchor,
         )
 
         self.white_button.pack()
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.title("WhiteButton Test")
+    root.geometry("200x200")
+    root.config(bg="white")
+
+    white_button = WhiteButton(root, "Test")
+    white_button.pack()
+
+    root.mainloop()
