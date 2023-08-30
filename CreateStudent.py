@@ -8,7 +8,7 @@ from modules.WhiteButton import WhiteButton
 
 
 class CreateStudent:
-    
+
     """
     A page for creating a student.
 
@@ -30,31 +30,35 @@ class CreateStudent:
 
         self._student_name_entry = TextEntry(self.root, "Student Name", width=38)
         self._student_id_entry = TextEntry(
-            self.root, "Student ID", regen=False, copy=True, width=38
+            self.root, "Student ID", regen_student_id=False, copy=True, width=38
         )
         self._student_password_entry = TextEntry(
-            self.root, "Student Password", regen=True, copy=True, width=38
+            self.root, "Student Password", regen_password=True, copy=True, width=38
         )
         self._current_semester_entry = TextEntry(
             self.root, "Current Semester", width=38
         )
         self._current_program_entry = TextEntry(self.root, "Current Program", width=38)
         self._create_button = WhiteButton(
-            self.root, "Create Student", self._create_student_handler, width=13
+            self.root,
+            "Create Student",
+            self._create_student_handler,
+            width=14,
+            height=2,
         )
 
         self._student_name_entry.pack()
         self._student_name_entry.place(x=48, y=160)
         self._student_id_entry.pack()
-        self._student_id_entry.place(x=48, y=230)
+        self._student_id_entry.place(x=48, y=240)
         self._student_password_entry.pack()
-        self._student_password_entry.place(x=48, y=320)
+        self._student_password_entry.place(x=48, y=330)
         self._current_semester_entry.pack()
-        self._current_semester_entry.place(x=48, y=440)
+        self._current_semester_entry.place(x=48, y=450)
         self._current_program_entry.pack()
-        self._current_program_entry.place(x=48, y=520)
+        self._current_program_entry.place(x=48, y=530)
         self._create_button.pack()
-        self._create_button.place(x=48, y=615)
+        self._create_button.place(x=48, y=610)
 
     def _create_student_handler(self):
         student_name = self._student_name_entry.get_text()
