@@ -19,6 +19,7 @@ class Heading(tk.Label):
         text: str,
         heading: Literal[1, 2, 3, 4, 5, 6, 7],
         color: str = "#000000",
+        **kwargs,
     ):
         self._headings = {
             1: ("Inter 40 bold"),
@@ -35,6 +36,7 @@ class Heading(tk.Label):
             text=text,
             font=self._headings[heading],
             fg=color,
+            **kwargs,
         )
 
 
@@ -43,7 +45,7 @@ if __name__ == "__main__":
     root.geometry("400x400")
     root.config(bg="#FFFFFF")
 
-    heading = Heading(root, "Heading", 5, "#4F4F4F")
+    heading = Heading(root, "Heading", 5, "#4F4F4F", pady=50)
     heading.pack()
 
     root.mainloop()
