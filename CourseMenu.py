@@ -28,3 +28,29 @@ class CoursesMenu(Page):
 
 courses_menu = CoursesMenu(root)
 courses_menu.pack()
+
+class CourseBox(tk.Frame):
+    def __init__( 
+            self, 
+            root: tk.Tk, 
+            course_name: str, 
+            course_code: str, ):
+
+        super().__init__(root)
+
+        #Create label for course name
+        self.course_name = course_name   
+        self.course_name_label = Heading(self, course_name, 3)
+        self.course_name_label.grid(row=0, column=0, columnspan=4, sticky="w")
+
+        #Create label for course code
+        self.course_code = course_code
+        self.course_code_label = Heading(self, course_code, 3)
+        self.course_code_label.grid(row=0, column=4, columnspan=4, sticky="w")
+
+
+# course_box = CourseBox(root, "Accadamic English", "(PEN0065)")
+# course_box.place(x=48, y=300)
+
+
+# root.mainloop()
