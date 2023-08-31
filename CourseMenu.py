@@ -1,11 +1,11 @@
 import tkinter as tk
 from typing import *
 
-from modules import BackButton
-from modules import MMULeft
-from modules import Heading
-from modules import Page
-from modules import WhiteButton
+from modules.BackButton import BackButton
+from modules.MMULeft import MMULeft
+from modules.Heading import Heading
+from modules.Page import Page
+from modules.WhiteButton import WhiteButton
 
 root = tk.Tk()
 
@@ -29,13 +29,17 @@ class CoursesMenu(Page):
 courses_menu = CoursesMenu(root)
 courses_menu.pack()
 
+
 class CourseBox(tk.Frame):
     def __init__( 
             self, 
             root: tk.Tk, 
             course_name: str, 
-            course_code: str, ):
-
+            course_code: str, 
+            x_like_count_label:int, 
+            x_dislike_count_label:int,
+            ):
+        
         super().__init__(root)
 
         #Create label for course name
@@ -56,7 +60,7 @@ class CourseBox(tk.Frame):
         self.like_button = tk.Button(
             self,
             image=self.like_button_image,
-            command=self.increment_likes,  
+            command=self.increment_likes,  # Call increment_likes when the button is clicked
             borderwidth=0,
             relief="flat",
         )
@@ -66,11 +70,37 @@ class CourseBox(tk.Frame):
         self.dislike_button = tk.Button(
             self,
             image=self.dislike_button_image,
-            command=self.increment_dislike, 
+            command=self.increment_dislike, # Call increment_dislike when the button is clicked
             borderwidth=0,
             relief="flat"
         )
         self.dislike_button.grid(row=2, column=1, sticky="w",padx=0)
+        
+        self.like_count = tk.IntVar()  # Variable to store the like count
+        self.like_count.set(0) #Set like counter to begin from 0
+
+        self.dislike_count = tk.IntVar() #Variable to stroe the like count
+        self.dislike_count.set(0) #Set dislike counter to begin from 0
+
+        
+        self.x_like_count_label = x_like_count_label 
+        self.like_count_label = tk.Label(
+                                        self, 
+                                        textvariable=self.like_count, # automatically update the label
+                                        fg="green"
+        )  
+        self.like_count_label.place(x=x_like_count_label, y=44) ##Specify x possition of like counter label
+
+
+        self.x_dislike_count_label = x_dislike_count_label 
+        self.dislike_count_label = tk.Label(
+                                        self, 
+                                        textvariable=self.dislike_count, # automatically update the label
+                                        fg="red"
+                     
+        )  
+        self.dislike_count_label.place(x=x_dislike_count_label, y=44) #Specify y possition of dislike counter label
+
 
     def increment_likes(self):
         self.like_count.set(self.like_count.get() + 1)  #Increment the like count
@@ -84,9 +114,7 @@ class CourseBox(tk.Frame):
 
 
 
-
-
-course_box = CourseBox(root, "Accadamic English", "(PEN0065)")
+course_box = CourseBox(root, "Accadamic English", "(PEN0065)", 26 ,104)
 course_box.place(x=48, y=300)
 
 
