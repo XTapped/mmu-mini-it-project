@@ -129,7 +129,7 @@ class TextEntry(tk.Frame):
         self._regenerate.bind("<Button-1>", self._populate_entry)
 
     def _display_copy_button(self):
-        self._copy.pack(anchor=tk.W)
+        self._copy.place(x=120, y=62)
         self._copy.bind("<Button-1>", self._copy_password)
 
     def get(self) -> str:
@@ -153,6 +153,8 @@ if __name__ == "__main__":
     frame.pack()
 
     text_entry = TextEntry(frame, "TextEntry Test", regen_student_id=True, copy=True)
+    text_entry_2 = TextEntry(frame, "TextEntry Test 2", regen_password=True, copy=True)
     text_entry.pack()
+    text_entry_2.pack()
 
     root.mainloop()

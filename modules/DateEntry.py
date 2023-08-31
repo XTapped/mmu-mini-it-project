@@ -1,6 +1,9 @@
 from typing import *
 import tkinter as tk
-import DropDown as lib
+
+# Note: Running this file directly will throw a ModuleNotFoundError because of this import statement.
+# If you want to run this file directly, use the -m flag like so: python -m modules.DateEntry
+from .DropDown import DropDown
 
 
 class DateEntry(tk.Frame):
@@ -36,9 +39,9 @@ class DateEntry(tk.Frame):
         self._label = tk.Label(
             self, text="Class Time (Day/Start Time/End Time)", font=("Inter", 16)
         )
-        self._day = lib.DropDown(self, self._days_list, width=10)
-        self._start_hour = lib.DropDown(self, self._hours_list, width=10)
-        self._end_hour = lib.DropDown(self, self._hours_list, width=10)
+        self._day = DropDown(self, self._days_list, width=10)
+        self._start_hour = DropDown(self, self._hours_list, width=10)
+        self._end_hour = DropDown(self, self._hours_list, width=10)
 
         self._label.grid(sticky=tk.W, row=0, column=0)
         self._day.grid(sticky=tk.W, row=1, column=0)
@@ -57,13 +60,13 @@ class DateEntry(tk.Frame):
 
 
 # test code
-# if __name__ == "__main__":
-#     root = tk.Tk()
-#     root.geometry("800x500")
-#     root.title("DateEntry Test")
-#     root.resizable(False, False)
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.geometry("800x500")
+    root.title("DateEntry Test")
+    root.resizable(False, False)
 
-#     date = DateEntry(root)
-#     date.pack(anchor=tk.W, side=tk.TOP, padx=20, pady=20)
+    date = DateEntry(root)
+    date.pack(anchor=tk.W, side=tk.TOP, padx=20, pady=20)
 
-#     root.mainloop()
+    root.mainloop()
