@@ -1,29 +1,30 @@
 import tkinter as tk
 from typing import *
 
-from modules.BackButton import BackButton
-from modules.MMULeft import MMULeft
-from modules.Heading import Heading
-from modules.Page import Page
-from modules.WhiteButton import WhiteButton
+from modules import BackButton
+from modules import MMULeft
+from modules import Heading
+from modules import ScrollableFrame
+from modules import WhiteButton
 
 root = tk.Tk()
 
 
-class CoursesMenu(Page):
+class CoursesMenu(ScrollableFrame):
     def __init__(self, root: tk.Tk):
         super().__init__(root, "Courses Menu")
 
-        back_button = BackButton(self, None)
-        back_button.place(x=48, y=40)
+        self.interior_backbutton=BackButton(self, None)
+        self.interior_backbutton.pack()
 
-        MMULeft(self).pack()
+        self.interior_mmuleft=MMULeft(self)
+        self.interior_mmuleft.pack()
 
-        heading_1 = Heading(self, "Foundation In IT", 1)
-        heading_1.place(x=48, y=149)
+        self.interior_heading_1 = Heading(self, "Foundation In IT", 1)
+        self.interior_heading_1.place(x=48, y=149)
 
-        heading_2 = Heading(self, "Semester 3", 2)
-        heading_2.place(x=48, y=210)
+        self.interior_heading_2 = Heading(self, "Semester 3", 2)
+        self.interior_heading_2.place(x=48, y=210)
 
 
 courses_menu = CoursesMenu(root)
@@ -84,21 +85,26 @@ class CourseBox(tk.Frame):
 
         
         self.x_like_count_label = x_like_count_label 
-        self.like_count_label = tk.Label(
+        self.like_count_label = Heading(
                                         self, 
-                                        textvariable=self.like_count, # automatically update the label
-                                        fg="green"
+                                        "",
+                                        6,
+                                        "#07A40D",
+                                        textvariable=self.like_count, # automatically update the label                           
         )  
-        self.like_count_label.place(x=x_like_count_label, y=44) ##Specify x possition of like counter label
+        
+        self.like_count_label.place(x=x_like_count_label, y=44) #Specify x possition of like counter label
 
 
         self.x_dislike_count_label = x_dislike_count_label 
-        self.dislike_count_label = tk.Label(
-                                        self, 
-                                        textvariable=self.dislike_count, # automatically update the label
-                                        fg="red"
-                     
+        self.dislike_count_label = Heading(
+                                        self,
+                                        "",
+                                        6,
+                                        "#EC1A2F",
+                                        textvariable=self.dislike_count, # automatically update the label              
         )  
+        
         self.dislike_count_label.place(x=x_dislike_count_label, y=44) #Specify y possition of dislike counter label
 
 
@@ -108,14 +114,9 @@ class CourseBox(tk.Frame):
         
     def increment_dislike(self):
         self.dislike_count.set(self.dislike_count.get() + 1) #Increment the dislike count
+        
 
+#course_box = CourseBox(root, "Accadamic English", "(PEN0065)", 26 ,104)
+#course_box.place(x=48, y=300)
 
-
-
-
-
-course_box = CourseBox(root, "Accadamic English", "(PEN0065)", 26 ,104)
-course_box.place(x=48, y=300)
-
-
-root.mainloop()
+#root.mainloop()
