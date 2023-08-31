@@ -78,11 +78,11 @@ class CreateStudent:
             f"Program: {current_program}"
         )
 
+#TEST CODE 
+# if __name__ == "__main__":
+#     import tkinter as tk
 
-if __name__ == "__main__":
-    import tkinter as tk
-
-    root = tk.Tk()
-    root.title("Create Student")
-    create_student_page = CreateStudent(root)
-    root.mainloop()
+#     root = tk.Tk()
+#     root.title("Create Student")
+#     create_student_page = CreateStudent(root)
+#     root.mainloop()
