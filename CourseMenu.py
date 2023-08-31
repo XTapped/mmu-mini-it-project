@@ -48,9 +48,37 @@ class CourseBox(tk.Frame):
         self.course_code_label = Heading(self, course_code, 3)
         self.course_code_label.grid(row=0, column=4, columnspan=4, sticky="w")
 
+        #Add like & Dislike img
+        self.like_button_image = tk.PhotoImage(file="assets/like.png")
+        self.dislike_button_image = tk.PhotoImage(file="assets/dislike.png")
 
-# course_box = CourseBox(root, "Accadamic English", "(PEN0065)")
-# course_box.place(x=48, y=300)
+        #Create like button 
+        self.like_button = tk.Button(
+            self,
+            image=self.like_button_image,
+            command=None,  
+            borderwidth=0,
+            relief="flat",
+        )
+        self.like_button.grid(row=2, column=0, sticky="w",padx=0,columnspan=2)
+
+        #Create dislike button
+        self.dislike_button = tk.Button(
+            self,
+            image=self.dislike_button_image,
+            command=None, 
+            borderwidth=0,
+            relief="flat"
+        )
+        self.dislike_button.grid(row=2, column=1, sticky="w",padx=0)
 
 
-# root.mainloop()
+
+
+
+
+course_box = CourseBox(root, "Accadamic English", "(PEN0065)")
+course_box.place(x=48, y=300)
+
+
+root.mainloop()
