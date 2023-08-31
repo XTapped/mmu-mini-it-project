@@ -56,7 +56,7 @@ class CourseBox(tk.Frame):
         self.like_button = tk.Button(
             self,
             image=self.like_button_image,
-            command=None,  
+            command=self.increment_likes,  
             borderwidth=0,
             relief="flat",
         )
@@ -66,11 +66,20 @@ class CourseBox(tk.Frame):
         self.dislike_button = tk.Button(
             self,
             image=self.dislike_button_image,
-            command=None, 
+            command=self.increment_dislike, 
             borderwidth=0,
             relief="flat"
         )
         self.dislike_button.grid(row=2, column=1, sticky="w",padx=0)
+
+    def increment_likes(self):
+        self.like_count.set(self.like_count.get() + 1)  #Increment the like count
+        
+        
+    def increment_dislike(self):
+        self.dislike_count.set(self.dislike_count.get() + 1) #Increment the dislike count
+
+
 
 
 
