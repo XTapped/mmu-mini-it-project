@@ -1,10 +1,10 @@
 import tkinter as tk
 from typing import *
 
-from modules.BackButton import BackButton
-from modules.MMULeft import MMULeft
-from modules.TextEntry import TextEntry
-from modules.WhiteButton import WhiteButton
+from modules import BackButton
+from modules import MMULeft
+from modules import TextEntry
+from modules import WhiteButton
 
 
 class CreateStudent:
