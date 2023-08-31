@@ -34,17 +34,17 @@ class StudentAction(tk.Frame):
         Update_Delete_course.place(x=48, y=260)
 
 
-# TEST CODE
-# if __name__ == "__main__":
-#     root = tk.Tk()
-#     root.geometry("800x500")
-#     root.title("Student Test")
-#     root.resizable(False, False)
+#TEST CODE
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.geometry("800x500")
+    root.title("Student Test")
+    root.resizable(False, False)
 
-#     frame = tk.Frame(root)
-#     frame.pack()
+    frame = tk.Frame(root)
+    frame.pack()
 
-#     course_action = StudentAction(root)
-#     course_action.pack()
+    course_action = StudentAction(root)
+    course_action.pack()
 
-#     root.mainloop()
+    root.mainloop()
