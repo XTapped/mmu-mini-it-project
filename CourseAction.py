@@ -1,10 +1,10 @@
 import tkinter as tk
 from typing import *
 
-from modules.MMULeft import MMULeft
-from modules.BackButton import BackButton
-from modules.Heading import Heading
-from modules.WhiteButton import WhiteButton
+from modules import MMULeft
+from modules import BackButton
+from modules import Heading
+from modules import WhiteButton
 
 class CourseAction(tk.Frame):
     def __init__(self, root: tk.Tk):
