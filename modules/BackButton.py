@@ -29,12 +29,12 @@ class BackButton(tk.Button):
         self._current_frame.pack_forget()
         self._back_frame.pack()
 
-    def pack(self):
-        super().pack()
+    def pack(self, **kwargs):
+        super().pack(**kwargs)
         self.place(x=48, y=30)
 
-    def grid(self):
-        super().grid()
+    def grid(self, **kwargs):
+        super().grid(**kwargs)
         self.place(x=48, y=30)
 
 
