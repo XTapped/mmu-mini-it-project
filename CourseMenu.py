@@ -9,6 +9,7 @@ from modules import WhiteButton
 
 root = tk.Tk()
 
+
 class CoursesMenu(ScrollableFrame):
     def __init__(self, root: tk.Tk):
         total_height = 10 * 100
@@ -34,12 +35,14 @@ class CoursesMenu(ScrollableFrame):
 
         self.interior.update_idletasks()
 
+
 class CourseBox(tk.Frame):
     def __init__(
         self,
         root: tk.Tk,
         course_name: str,
         course_code: str,
+        course_description: str,
     ):
         super().__init__(root)
 
@@ -51,7 +54,7 @@ class CourseBox(tk.Frame):
         # Create label for course code
         self.course_code = course_code
         self.course_code_label = Heading(self, course_code, 3)
-        self.course_code_label.grid(row=0, column=2, columnspan=1, sticky="w")
+        self.course_code_label.grid(row=0, column=2, columnspan=1, sticky="w", padx=0)
 
         # Add like & Dislike img
         self.like_button_image = tk.PhotoImage(file="assets/like.png")
@@ -65,7 +68,9 @@ class CourseBox(tk.Frame):
             borderwidth=0,
             relief="flat",
         )
-        self.like_button.grid(row=1, column=0, columnspan=1, sticky="W")
+        self.like_button.grid(
+            row=1, column=0, columnspan=1, sticky="W", padx=5, pady=10
+        )
 
         # Create dislike button
         self.dislike_button = tk.Button(
@@ -75,7 +80,9 @@ class CourseBox(tk.Frame):
             borderwidth=0,
             relief="flat",
         )
-        self.dislike_button.grid(row=1, column=0, columnspan=1, sticky="W", padx=60)
+        self.dislike_button.grid(
+            row=1, column=0, columnspan=1, sticky="W", padx=60, pady=10
+        )
 
         self.like_count = tk.IntVar()  # Variable to store the like count
         self.like_count.set(0)  # Set like counter to begin from 0
@@ -91,7 +98,7 @@ class CourseBox(tk.Frame):
             "#07A40D",
             textvariable=self.like_count,  # automatically update the like label
         )
-        self.like_count_label.grid(row=1, column=0, columnspan=1, sticky="W", padx=25)
+        self.like_count_label.grid(row=1, column=0, columnspan=1, sticky="W", padx=30)
 
         # Create dislike counter label
         self.dislike_count_label = Heading(
@@ -101,10 +108,25 @@ class CourseBox(tk.Frame):
             "#EC1A2F",
             textvariable=self.dislike_count,  # automatically update the dislike label
         )
-        self.dislike_count_label.grid(row=1, column=0, columnspan=1, sticky="W", padx=90)
+        self.dislike_count_label.grid(
+            row=1, column=0, columnspan=1, sticky="W", padx=90
+        )
 
+        # Create Course Description
+        self.course_description = course_description
+        self.course_description_text = tk.Message(
+            self,
+            text=course_description,
+            font=("inter", 13),
+            aspect=360,
+            justify="left",
+        )
+        self.course_description_text.grid(
+            row=2, column=0, columnspan=50, sticky="W", padx=0, pady=0
+        )
+        
 
-
+    # Like & dislike counter method
     def increment_likes(self):
         self.like_count.set(self.like_count.get() + 1)  # Increment the like count
 
@@ -118,10 +140,12 @@ courses_menu = CoursesMenu(root)
 courses_menu.pack(fill="both", expand=True)
 
 
-eng = CourseBox(courses_menu.interior, 
-                "Acadamic English", 
-                "(PEN0065)")
-               
+eng = CourseBox(
+    courses_menu.interior,
+    "Acadamic English",
+    "(PEN0065)",
+    "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
+)
 eng.place(x=48, y=280)
 
 
