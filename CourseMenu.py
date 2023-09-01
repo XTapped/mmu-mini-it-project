@@ -12,7 +12,7 @@ root = tk.Tk()
 
 class CoursesMenu(ScrollableFrame):
     def __init__(self, root: tk.Tk):
-        total_height = 10 * 100
+        total_height = 10 * 300
         super().__init__(root, "Courses Menu", height=total_height)
 
         self.interior_backbutton = BackButton(
@@ -20,17 +20,13 @@ class CoursesMenu(ScrollableFrame):
         )  # Add to interior frame
         self.interior_backbutton.pack()
 
-        self.interior_mmuleft = MMULeft(self.interior)  # Add to interior frame
+        self.interior_mmuleft = MMULeft(self.interior)
         self.interior_mmuleft.pack()
 
-        self.interior_heading_1 = Heading(
-            self.interior, "Foundation In IT", 1
-        )  # Add to interior frame
+        self.interior_heading_1 = Heading(self.interior, "Foundation In IT", 1)
         self.interior_heading_1.place(x=48, y=149)
 
-        self.interior_heading_2 = Heading(
-            self.interior, "Semester 3", 2
-        )  # Add to interior frame
+        self.interior_heading_2 = Heading(self.interior, "Semester 3", 2)
         self.interior_heading_2.place(x=48, y=210)
 
         self.interior.update_idletasks()
@@ -124,21 +120,36 @@ class CourseBox(tk.Frame):
         self.course_description_text.grid(
             row=2, column=0, columnspan=50, sticky="W", padx=0, pady=0
         )
-        
+
+         # Create Apply for Class button
+        self.apply_button = WhiteButton(
+            self,
+            text="Apply for Class",
+            command=lambda: self.open_apply_window(course_name, course_code),
+            width=15,
+        )
+        self.apply_button.grid(
+            row=3, column=0, columnspan=1, sticky="W", padx=5, pady=10
+        )
 
     # Like & dislike counter method
     def increment_likes(self):
-        self.like_count.set(self.like_count.get() + 1)  # Increment the like count
+        self.like_count.set(
+            self.like_count.get() + 1
+        )  # Increment the like count
 
     def increment_dislike(self):
         self.dislike_count.set(
             self.dislike_count.get() + 1
         )  # Increment the dislike count
 
-
+    def open_apply_window(self, course_name, course_code):
+        self.apply_window = tk.Toplevel(self)
+        self.apply_window.title(f"Apply for {course_name}{course_code}")
+        self.apply_window.geometry("700x400")  # Size of the window
+        
 courses_menu = CoursesMenu(root)
 courses_menu.pack(fill="both", expand=True)
-
 
 eng = CourseBox(
     courses_menu.interior,
@@ -146,7 +157,7 @@ eng = CourseBox(
     "(PEN0065)",
     "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
 )
-eng.place(x=48, y=280)
+eng.place(x=48, y=270)
 
 
 root.mainloop()
