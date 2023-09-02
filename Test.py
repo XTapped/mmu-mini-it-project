@@ -11,7 +11,7 @@ root = tk.Tk()
 
 class CoursesMenu(ScrollableFrame):
     def __init__(self, root: tk.Tk):
-        total_height = 10 * 100
+        total_height = 10 * 300
         super().__init__(root, "Courses Menu", height=total_height)
 
         self.interior_backbutton = BackButton(
@@ -19,17 +19,13 @@ class CoursesMenu(ScrollableFrame):
         )  # Add to interior frame
         self.interior_backbutton.pack()
 
-        self.interior_mmuleft = MMULeft(self.interior)  # Add to interior frame
+        self.interior_mmuleft = MMULeft(self.interior)
         self.interior_mmuleft.pack()
 
-        self.interior_heading_1 = Heading(
-            self.interior, "Foundation In IT", 1
-        )  # Add to interior frame
+        self.interior_heading_1 = Heading(self.interior, "Foundation In IT", 1)
         self.interior_heading_1.place(x=48, y=149)
 
-        self.interior_heading_2 = Heading(
-            self.interior, "Semester 3", 2
-        )  # Add to interior frame
+        self.interior_heading_2 = Heading(self.interior, "Semester 3", 2)
         self.interior_heading_2.place(x=48, y=210)
 
         self.interior.update_idletasks()
@@ -40,6 +36,7 @@ class CourseBox(tk.Frame):
         root: tk.Tk,
         course_name: str,
         course_code: str,
+        course_description: str,
     ):
         super().__init__(root)
 
@@ -51,7 +48,7 @@ class CourseBox(tk.Frame):
         # Create label for course code
         self.course_code = course_code
         self.course_code_label = Heading(self, course_code, 3)
-        self.course_code_label.grid(row=0, column=2, columnspan=1, sticky="w")
+        self.course_code_label.grid(row=0, column=2, columnspan=1, sticky="w", padx=0)
 
         # Add like & Dislike img
         self.like_button_image = tk.PhotoImage(file="assets/like.png")
@@ -65,7 +62,9 @@ class CourseBox(tk.Frame):
             borderwidth=0,
             relief="flat",
         )
-        self.like_button.grid(row=1, column=0, columnspan=1, sticky="W")
+        self.like_button.grid(
+            row=1, column=0, columnspan=1, sticky="W", padx=5, pady=10
+        )
 
         # Create dislike button
         self.dislike_button = tk.Button(
@@ -75,7 +74,9 @@ class CourseBox(tk.Frame):
             borderwidth=0,
             relief="flat",
         )
-        self.dislike_button.grid(row=1, column=0, columnspan=1, sticky="W", padx=60)
+        self.dislike_button.grid(
+            row=1, column=0, columnspan=1, sticky="W", padx=60, pady=10
+        )
 
         self.like_count = tk.IntVar()  # Variable to store the like count
         self.like_count.set(0)  # Set like counter to begin from 0
@@ -91,7 +92,7 @@ class CourseBox(tk.Frame):
             "#07A40D",
             textvariable=self.like_count,  # automatically update the like label
         )
-        self.like_count_label.grid(row=1, column=0, columnspan=1, sticky="W", padx=25)
+        self.like_count_label.grid(row=1, column=0, columnspan=1, sticky="W", padx=30)
 
         # Create dislike counter label
         self.dislike_count_label = Heading(
@@ -101,31 +102,115 @@ class CourseBox(tk.Frame):
             "#EC1A2F",
             textvariable=self.dislike_count,  # automatically update the dislike label
         )
-        self.dislike_count_label.grid(row=1, column=0, columnspan=1, sticky="W", padx=90)
+        self.dislike_count_label.grid(
+            row=1, column=0, columnspan=1, sticky="W", padx=90
+        )
 
+        # Create Course Description
+        self.course_description = course_description
+        self.course_description_text = tk.Message(
+            self,
+            text=course_description,
+            font=("inter", 13),
+            aspect=360,
+            justify="left",
+        )
+        self.course_description_text.grid(
+            row=2, column=0, columnspan=50, sticky="W", padx=0, pady=0
+        )
 
+         # Create Apply for Class button
+        self.apply_button = WhiteButton(
+            self,
+            text="Apply for Class",
+            command= lambda: self.open_apply_window(course_name, course_code),
+            width=15,
+        )
+        self.apply_button.grid(
+            row=3, column=0, columnspan=1, sticky="W", padx=5, pady=10
+        )
 
+    # Like & dislike counter method
     def increment_likes(self):
-        self.like_count.set(self.like_count.get() + 1)  # Increment the like count
+        self.like_count.set(
+            self.like_count.get() + 1
+        )  # Increment the like count
 
     def increment_dislike(self):
         self.dislike_count.set(
             self.dislike_count.get() + 1
         )  # Increment the dislike count
 
+    def open_apply_window(self, course_name, course_code):
+        self.apply_window = ApplyCourse(course_name, course_code)
+
+#2nd Window 
+
+class ApplyCourse(tk.Toplevel):
+    def __init__(self, course_name, course_code):
+        super().__init__()
+
+        self.title(f"Apply for {course_name} {course_code}")
+        self.geometry("700x400") 
+
+        self.icon_images = []
+
+        self.time_options = [
+            {"time": "Monday (13:00-16:00) / Thursday (08:00-11:00) CMNX1002", "capacity": "53/120"},
+            {"time": "Tuesday (16:00-19:00) / Wednesday (14:00-17:00) CQAR3001", "capacity": "45/120"},
+            
+        ]
+
+        for i, option in enumerate(self.time_options):
+            var = tk.IntVar()
+            
+            checkbox = tk.Checkbutton(self, variable=var)
+            checkbox.grid(row=i*2, column=0, sticky="W")
+
+            time_label = tk.Label(self, text=option["time"])
+            time_label.grid(row=i*2, column=1, sticky="W")
+
+            capacity_label = tk.Label(self, text=option["capacity"])
+            capacity_label.grid(row=i*3, column=1, sticky="W")
+
+            person_icon = self.get_person_icon()
+            icon_label = tk.Label(self, image=person_icon)
+            icon_label.grid(row=i*2+1, column=0)
+        
+    def get_person_icon(self):
+        person_icon = tk.PhotoImage(file="assets/capacity_blue.png")
+        # Add the image to the list to keep a reference
+        self.icon_images.append(person_icon)
+        return person_icon
+    
 
 courses_menu = CoursesMenu(root)
 courses_menu.pack(fill="both", expand=True)
 
+eng = CourseBox(
+    courses_menu.interior,
+    "Acadamic English",
+    "(PEN0065)",
+    "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
+)
+eng.place(x=48, y=270)
 
-eng = CourseBox(courses_menu.interior, 
-                "Acadamic English", 
-                "(PEN0065)")
-               
-eng.place(x=48, y=280)
+principles_of_physics = CourseBox(
+    courses_menu.interior,
+    "Principles of Physics",
+    "(PPP0101)",
+    "Principles of Physics is a course that introduces the fundamental concepts and methods of physics. It covers topics such as mechanics, thermodynamics, electromagnetism, optics, and quantum physics. This course aims to develop the students’ analytical and problem-solving skills, as well as their understanding of the physical world and its phenomena. This course also prepares the students for more advanced courses in physics and related fields. This course is suitable for students who have a strong background in mathematics and science, and who are interested in pursuing a career or further studies in physics or engineering.",
+)
+principles_of_physics.place(x=48,y=640)
 
-# Physics = CourseBox(courses_menu.interior, "Principles of Physics", "(PPP0101)")
-# Physics.place(x=48, y=380)
+mathematics_3 = CourseBox(
+    courses_menu.interior,
+    "Mathematics III",
+    "(PMT0301)",
+    "Mathematics III is a subject that covers advanced topics in mathematics, such as differential equations, linear algebra, complex analysis, and abstract algebra. This course aims to develop students’ mathematical skills and knowledge, as well as their ability to apply them to various fields of science and engineering. Students who take this course are expected to have a solid background in calculus, geometry, and algebra, and be familiar with basic concepts of logic and proof. Mathematics III is a challenging but rewarding subject that will prepare students for further studies or careers in mathematics and related disciplines.",
+)
+mathematics_3.place(x=48,y=1010)
+
 
 courses_menu.interior.update_idletasks()
 root.mainloop()
