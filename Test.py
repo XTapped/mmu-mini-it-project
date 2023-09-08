@@ -221,7 +221,7 @@ class ApplyCourse(tk.Toplevel):
 
 
 courses_menu = CoursesMenu(root)
-courses_menu.pack(fill="both", expand=True)
+courses_menu.pack()
 
 eng = CourseBox(
     courses_menu.interior,

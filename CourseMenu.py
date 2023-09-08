@@ -74,6 +74,7 @@ class CourseBox(tk.Frame):
             borderwidth=0,
             relief="flat",
         )
+        
         self.dislike_button.grid(
             row=1, column=0, columnspan=1, sticky="W", padx=60, pady=10
         )
@@ -221,7 +222,7 @@ class ApplyCourse(tk.Toplevel):
 
 
 courses_menu = CoursesMenu(root)
-courses_menu.pack(fill="both", expand=True)
+courses_menu.pack()
 
 eng = CourseBox(
     courses_menu.interior,
