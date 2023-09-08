@@ -220,7 +220,6 @@ class ApplyCourse(tk.Toplevel):
         selected_time = self.selected_time.get()
         ApplyCourse.destroy(self)
 
-
 courses_menu = CoursesMenu(root)
 courses_menu.pack()
 
