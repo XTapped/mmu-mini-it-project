@@ -143,46 +143,82 @@ class CourseBox(tk.Frame):
 
     def open_apply_window(self, course_name, course_code):
         self.apply_window = ApplyCourse(course_name, course_code)
-
-#2nd Window 
+        
 
 class ApplyCourse(tk.Toplevel):
-    def __init__(self, course_name, course_code):
-        super().__init__()
+    def __init__(
+            self, 
+            course_name, 
+            course_code,
+        ):
 
+        super().__init__(root)
         self.title(f"Apply for {course_name} {course_code}")
-        self.geometry("700x400") 
-
-        self.icon_images = []
-
-        self.time_options = [
-            {"time": "Monday (13:00-16:00) / Thursday (08:00-11:00) CMNX1002", "capacity": "53/120"},
-            {"time": "Tuesday (16:00-19:00) / Wednesday (14:00-17:00) CQAR3001", "capacity": "45/120"},
-            
-        ]
-
-        for i, option in enumerate(self.time_options):
-            var = tk.IntVar()
-            
-            checkbox = tk.Checkbutton(self, variable=var)
-            checkbox.grid(row=i*2, column=0, sticky="W")
-
-            time_label = tk.Label(self, text=option["time"])
-            time_label.grid(row=i*2, column=1, sticky="W")
-
-            capacity_label = tk.Label(self, text=option["capacity"])
-            capacity_label.grid(row=i*3, column=1, sticky="W")
-
-            person_icon = self.get_person_icon()
-            icon_label = tk.Label(self, image=person_icon)
-            icon_label.grid(row=i*2+1, column=0)
+        self.geometry("700x500") 
         
-    def get_person_icon(self):
-        person_icon = tk.PhotoImage(file="assets/capacity_blue.png")
-        # Add the image to the list to keep a reference
-        self.icon_images.append(person_icon)
-        return person_icon
-    
+
+        self.heading_3 = Heading(self,"Choose your preferred class times",4)
+        self.heading_3.grid(row=0,column=0,columnspan=3,sticky="W")
+
+         # Shared variable
+        self.selected_time = tk.StringVar()
+
+        # List of time options
+        time_options = ["Monday (13:00-16:00) / Thursday (08:00-11:00)",
+                        "Tuesday (16:00-19:00) / Wednesday (14:00-17:00)",
+                        "Monday (08:00-11:00) / Wednesday (13:00-16:00)",
+                        "Wednesday (16:00-19:00) / Friday (08:00-11:00)"]
+        
+        # List of class location
+        class_location = ["CNMX1002","CQAR3001","CQCR2002","CMNX1005"]
+        
+        # List of class capacity
+        capacity_numbers = ["53/120","30/120","61/120","101/120"] 
+        
+        
+        # Images for radiobutton
+        self.img1 = tk.PhotoImage(file="assets/radiobutton_non_select.png")
+        self.img2 = tk.PhotoImage(file="assets/radiobutton_selected.png")
+
+        self.profile_img = tk.PhotoImage(file="assets/capacity_blue.png")
+
+        # Create RadioButton 
+        for i, option in enumerate(time_options):
+            rb = tk.Radiobutton(
+                self,
+                text=option,
+                font=("inter",15),
+                variable=self.selected_time,
+                value=option,
+                image=self.img1,
+                selectimage=self.img2,
+                compound='left',
+                borderwidth=0,
+                indicatoron=0,
+                padx=10
+            )
+            rb.grid(row=i*3+1,column=1,columnspan=2,sticky="W")
+        
+            location = Heading(self,class_location[i],6)
+            location.grid(row=i*3+2, column=1, columnspan=1, sticky="W",padx=42)
+
+            #Capacity image
+            profile = tk.Label(self, image=self.profile_img)
+            profile.grid(row=i*3+3, column=1, sticky="W", padx=10)
+
+            # Capacity number
+            capacity = Heading(self,capacity_numbers[i],6,"#0750A4") # replace 20 with your actual capacity value
+            capacity.grid(row=i*3+3, column=1, sticky="W", padx=30)
+
+        # Apply button
+        apply_button = WhiteButton(self,"Apply",command=self.apply)
+        apply_button.grid(row=len(time_options)*3+1, column=0, columnspan=2,padx=5,sticky="W")
+
+#Apply button method
+    def apply(self):
+        selected_time = self.selected_time.get()
+        ApplyCourse.destroy(self)
+
 
 courses_menu = CoursesMenu(root)
 courses_menu.pack(fill="both", expand=True)
@@ -214,3 +250,6 @@ mathematics_3.place(x=48,y=1010)
 
 courses_menu.interior.update_idletasks()
 root.mainloop()
+
+
+
