@@ -6,6 +6,7 @@ from modules import BackButton
 from modules import Heading
 from modules import WhiteButton
 
+
 class CourseAction(tk.Frame):
     def __init__(self, root: tk.Tk):
         super().__init__(root)
@@ -13,7 +14,7 @@ class CourseAction(tk.Frame):
         root.geometry("800x500")
         root.resizable(False, False)
 
-        back_button=BackButton(root,None)
+        back_button = BackButton(root, None)
         back_button.pack()
         back_button.place(x=48, y=40)
 
@@ -27,13 +28,14 @@ class CourseAction(tk.Frame):
         create_course.pack(anchor="w")
         create_course.place(x=48, y=200)
 
-        Update_Delete_course = WhiteButton(root, "Update/Delete Course", None, 19, "2", "w")
+        Update_Delete_course = WhiteButton(
+            root, "Update/Delete Course", None, 19, "2", "w"
+        )
         Update_Delete_course.pack()
         Update_Delete_course.place(x=48, y=260)
 
 
-
-#TEST CODE
+# TEST CODE
 if __name__ == "__main__":
     root = tk.Tk()
     root.geometry("800x500")
@@ -47,4 +49,3 @@ if __name__ == "__main__":
     course_action.pack()
 
     root.mainloop()
-
