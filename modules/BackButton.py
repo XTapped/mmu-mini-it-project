@@ -39,19 +39,19 @@ class BackButton(tk.Button):
 
 
 # if __name__ == "__main__":
-#     root = tk.Tk()
+#     root = Tk()
 #     root.geometry("800x500")
 #     root.title("BackButton Test")
 #     root.resizable(False, False)
 
-#     frame1 = tk.Frame(root, width=800, height=500, bg="red")
+#     frame1 = Frame(root, width=800, height=500, bg="red")
 #     frame1.pack()
-#     front_button = tk.Button(
+#     front_button = Button(
 #         frame1, text="Front", command=lambda: [frame1.pack_forget(), frame2.pack()]
 #     )
 #     front_button.pack()
 
-#     frame2 = tk.Frame(root, width=800, height=500, bg="blue")
+#     frame2 = Frame(root, width=800, height=500, bg="blue")
 #     back_button = BackButton(frame2, frame1)
 #     back_button.pack()
 
