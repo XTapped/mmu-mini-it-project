@@ -12,6 +12,8 @@ class ScrollableFrame(ttk.Frame):
     You should inherit this class and use self.interior to add widgets to the frame.
     If you find that some stuff is being cut off, try increasing the height of the frame.
 
+    Only display this frame using pack()
+
     Args:
         root (Tk): The root window.
         title (str, optional): The title of the window. Defaults to "MMU Mini IT Project".
@@ -57,8 +59,6 @@ class ScrollableFrame(ttk.Frame):
             0, 0, window=self.interior, anchor=NW
         )
 
-        self.pack(fill=BOTH, expand=TRUE)
-
     def _configure_interior(self, event):
         # Update the scrollbars to match the size of the inner frame.
         size = (self.interior.winfo_reqwidth(), self.interior.winfo_reqheight())
@@ -71,3 +71,6 @@ class ScrollableFrame(ttk.Frame):
         if self.interior.winfo_reqwidth() != self.canvas.winfo_width():
             # Update the inner frame's width to fill the canvas.
             self.canvas.itemconfigure(self.interior_id, width=self.canvas.winfo_width())
+
+    def pack(self, *args, **kwargs):
+        super().pack(expand=True, fill=BOTH, *args, **kwargs)

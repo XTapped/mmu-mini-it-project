@@ -43,11 +43,10 @@ class DateEntry(tk.Frame):
         self._start_hour = DropDown(self, self._hours_list, width=10)
         self._end_hour = DropDown(self, self._hours_list, width=10)
 
-        self._label.grid(sticky=tk.W, row=0, column=0)
-        self._day.grid(sticky=tk.W, row=1, column=0)
-        self._start_hour.grid(sticky=tk.W, row=2, column=0)
-        self._end_hour.grid(sticky=tk.W, row=3, column=0)
-        self.grid_rowconfigure(2, pad=20)
+        self._label.grid(sticky=tk.W, row=0, column=0, columnspan=3)
+        self._day.grid(sticky=tk.W, row=1, column=0, padx=(0, 15))
+        self._start_hour.grid(sticky=tk.W, row=1, column=1, padx=(0, 15))
+        self._end_hour.grid(sticky=tk.W, row=1, column=2)
 
     def get(self) -> Tuple[str, str, str]:
         """
