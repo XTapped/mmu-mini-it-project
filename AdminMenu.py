@@ -19,8 +19,7 @@ class AdminMenu(tk.Frame):
         root.resizable(False,False)
         super().__init__(root)
 
-       
-
+    
         self.backbutton = BackButton(root,None).pack()
     
         self.mmuleft = MMULeft(root).pack()
