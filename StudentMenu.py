@@ -31,11 +31,13 @@ class StudentMenu(tk.Frame):
         self.description_heading.place(x=44, y=190)
 
         self.available_course_button = WhiteButton(
-            root, "Browse Available Course", None, 20, 2
+            root, "Browse Available Course", None, 20, 2, "w"
         )
         self.available_course_button.place(x=48, y=245)
 
-        self.view_timetable_button = WhiteButton(root, "View Timetable", None, 20, 2)
+        self.view_timetable_button = WhiteButton(
+            root, "View Timetable", None, 20, 2, "w"
+        )
         self.view_timetable_button.place(x=48, y=305)
 
 
