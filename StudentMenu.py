@@ -25,10 +25,10 @@ class StudentMenu(tk.Frame):
         self.student_name_label.place(x=140, y=149)
 
         self.welcome_heading = Heading(root, "Hello,", 3)
-        self.welcome_heading.place(x=48, y=149)
+        self.welcome_heading.place(x=44, y=149)
 
         self.description_heading = Heading(root, "What would you like to do today?", 3)
-        self.description_heading.place(x=48, y=190)
+        self.description_heading.place(x=44, y=190)
 
         self.available_course_button = WhiteButton(
             root, "Browse Available Course", None, 20, 2
@@ -36,7 +36,7 @@ class StudentMenu(tk.Frame):
         self.available_course_button.place(x=48, y=245)
 
         self.view_timetable_button = WhiteButton(root, "View Timetable", None, 20, 2)
-        self.view_timetable_button.place(x=48, y=330)
+        self.view_timetable_button.place(x=48, y=305)
 
 
 student_menu = StudentMenu(root, "Kubenthran Udayar")
