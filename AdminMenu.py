@@ -9,7 +9,7 @@ from modules.Heading import Heading
 root = tk.Tk()
 
 
-class StudentMenu(tk.Frame):
+class AdminMenu(tk.Frame):
     def __init__(self, root: tk.Tk):
         root.geometry("800x500")
         root.title("Student Menu")
@@ -29,18 +29,18 @@ class StudentMenu(tk.Frame):
         self.description_heading = Heading(root, "What would you like to do today?", 3)
         self.description_heading.place(x=44, y=190)
 
-        self.available_course_button = WhiteButton(
+        self.student_actions_button = WhiteButton(
             root, "Student Actions", None, 20, 2, "w"
         )
-        self.available_course_button.place(x=48, y=245)
+        self.student_actions_button.place(x=48, y=245)
 
-        self.view_timetable_button = WhiteButton(
+        self.course_actions_button = WhiteButton(
             root, "Course Actions", None, 20, 2, "w"
         )
-        self.view_timetable_button.place(x=48, y=305)
+        self.course_actions_button.place(x=48, y=305)
 
 
-student_menu = StudentMenu(root)
+student_menu = AdminMenu(root)
 student_menu.pack()
 
 root.mainloop()
