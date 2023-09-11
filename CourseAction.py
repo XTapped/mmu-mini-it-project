@@ -32,7 +32,7 @@ class CourseAction(tk.Frame):
             root, "Update/Delete Course", None, 19, "2", "w"
         )
         Update_Delete_course.pack()
-        Update_Delete_course.place(x=48, y=280)
+        Update_Delete_course.place(x=48, y=260)
 
 
 # TEST CODE
