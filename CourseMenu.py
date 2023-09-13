@@ -1,13 +1,10 @@
 import tkinter as tk
 from typing import *
-
 from modules import BackButton
 from modules import MMULeft
 from modules import Heading
 from modules import ScrollableFrame
 from modules import WhiteButton
-
-root = tk.Tk()
 
 
 class CoursesMenu(ScrollableFrame):
@@ -224,33 +221,34 @@ class ApplyCourse(tk.Toplevel):
         ApplyCourse.destroy(self)
 
 
-courses_menu = CoursesMenu(root)
-courses_menu.pack()
+if __name__ == "__main__":
+    root = tk.Tk()
+    courses_menu = CoursesMenu(root)
+    courses_menu.pack()
 
-eng = CourseBox(
-    courses_menu.interior,
-    "Acadamic English",
-    "(PEN0065)",
-    "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
-)
-eng.place(x=48, y=270)
+    eng = CourseBox(
+        courses_menu.interior,
+        "Acadamic English",
+        "(PEN0065)",
+        "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
+    )
+    eng.place(x=48, y=270)
 
-principles_of_physics = CourseBox(
-    courses_menu.interior,
-    "Principles of Physics",
-    "(PPP0101)",
-    "Principles of Physics is a course that introduces the fundamental concepts and methods of physics. It covers topics such as mechanics, thermodynamics, electromagnetism, optics, and quantum physics. This course aims to develop the students’ analytical and problem-solving skills, as well as their understanding of the physical world and its phenomena. This course also prepares the students for more advanced courses in physics and related fields. This course is suitable for students who have a strong background in mathematics and science, and who are interested in pursuing a career or further studies in physics or engineering.",
-)
-principles_of_physics.place(x=48, y=640)
+    principles_of_physics = CourseBox(
+        courses_menu.interior,
+        "Principles of Physics",
+        "(PPP0101)",
+        "Principles of Physics is a course that introduces the fundamental concepts and methods of physics. It covers topics such as mechanics, thermodynamics, electromagnetism, optics, and quantum physics. This course aims to develop the students’ analytical and problem-solving skills, as well as their understanding of the physical world and its phenomena. This course also prepares the students for more advanced courses in physics and related fields. This course is suitable for students who have a strong background in mathematics and science, and who are interested in pursuing a career or further studies in physics or engineering.",
+    )
+    principles_of_physics.place(x=48, y=640)
 
-mathematics_3 = CourseBox(
-    courses_menu.interior,
-    "Mathematics III",
-    "(PMT0301)",
-    "Mathematics III is a subject that covers advanced topics in mathematics, such as differential equations, linear algebra, complex analysis, and abstract algebra. This course aims to develop students’ mathematical skills and knowledge, as well as their ability to apply them to various fields of science and engineering. Students who take this course are expected to have a solid background in calculus, geometry, and algebra, and be familiar with basic concepts of logic and proof. Mathematics III is a challenging but rewarding subject that will prepare students for further studies or careers in mathematics and related disciplines.",
-)
-mathematics_3.place(x=48, y=1010)
+    mathematics_3 = CourseBox(
+        courses_menu.interior,
+        "Mathematics III",
+        "(PMT0301)",
+        "Mathematics III is a subject that covers advanced topics in mathematics, such as differential equations, linear algebra, complex analysis, and abstract algebra. This course aims to develop students’ mathematical skills and knowledge, as well as their ability to apply them to various fields of science and engineering. Students who take this course are expected to have a solid background in calculus, geometry, and algebra, and be familiar with basic concepts of logic and proof. Mathematics III is a challenging but rewarding subject that will prepare students for further studies or careers in mathematics and related disciplines.",
+    )
+    mathematics_3.place(x=48, y=1010)
 
-
-courses_menu.interior.update_idletasks()
-root.mainloop()
+    courses_menu.interior.update_idletasks()
+    root.mainloop()

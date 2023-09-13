@@ -6,9 +6,6 @@ from modules import WhiteButton
 from modules import Heading
 
 
-root = tk.Tk()
-
-
 class AdminMenu(tk.Frame):
     def __init__(self, root: tk.Tk):
         root.geometry("800x500")
@@ -40,7 +37,8 @@ class AdminMenu(tk.Frame):
         self.course_actions_button.place(x=48, y=305)
 
 
-student_menu = AdminMenu(root)
-student_menu.pack()
-
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    student_menu = AdminMenu(root)
+    student_menu.pack()
+    root.mainloop()

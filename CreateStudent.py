@@ -73,8 +73,6 @@ class CreateStudent:
 
 
 if __name__ == "__main__":
-    import tkinter as tk
-
     root = tk.Tk()
     root.title("Create Student")
     create_student_page = CreateStudent(root)

@@ -5,9 +5,6 @@ from modules import WhiteButton
 from modules import Heading
 
 
-root = tk.Tk()
-
-
 class StudentMenu(tk.Frame):
     def __init__(self, root: tk.Tk, student_name):
         root.geometry("800x500")
@@ -40,7 +37,8 @@ class StudentMenu(tk.Frame):
         self.view_timetable_button.place(x=48, y=305)
 
 
-student_menu = StudentMenu(root, "Kubenthran Udayar")
-student_menu.pack()
-
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    student_menu = StudentMenu(root, "Kubenthran Udayar")
+    student_menu.pack()
+    root.mainloop()
