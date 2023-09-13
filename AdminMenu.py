@@ -1,4 +1,5 @@
 import tkinter as tk
+from typing import *
 from modules import BackButton
 from modules import MMULeft
 from modules import WhiteButton

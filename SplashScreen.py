@@ -1,9 +1,9 @@
+import tkinter as tk
 from modules import MMUCenter
 from modules import Heading
 from modules import TextEntry
 from modules import PasswordEntry
 from modules import WhiteButton
-import tkinter as tk
 
 
 class SplashScreen(tk.Frame):
