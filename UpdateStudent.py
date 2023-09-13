@@ -1,13 +1,11 @@
 import tkinter as tk
 from idlelib.tooltip import Hovertip
-from modules import (
-    ScrollableFrame,
-    BackButton,
-    MMULeft,
-    Heading,
-    WhiteButton,
-    RedButton,
-)
+from modules import ScrollableFrame
+from modules import BackButton
+from modules import MMULeft
+from modules import Heading
+from modules import WhiteButton
+from modules import RedButton
 
 
 class UpdateStudent(ScrollableFrame):

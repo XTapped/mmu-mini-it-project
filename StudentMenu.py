@@ -1,9 +1,8 @@
 import tkinter as tk
-
-from modules.BackButton import BackButton
-from modules.MMULeft import MMULeft
-from modules.WhiteButton import WhiteButton
-from modules.Heading import Heading
+from modules import BackButton
+from modules import MMULeft
+from modules import WhiteButton
+from modules import Heading
 
 
 root = tk.Tk()

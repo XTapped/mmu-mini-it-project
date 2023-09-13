@@ -1,5 +1,7 @@
 import tkinter as tk
-from modules import Heading, MMULeft, BackButton
+from modules import Heading
+from modules import MMULeft
+from modules import BackButton
 
 
 class TimetableMenu(tk.Frame):
