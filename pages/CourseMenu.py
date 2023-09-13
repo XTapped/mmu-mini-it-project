@@ -7,7 +7,7 @@ from modules import ScrollableFrame
 from modules import WhiteButton
 
 
-class CoursesMenu(ScrollableFrame):
+class CourseMenu(ScrollableFrame):
     def __init__(self, root: tk.Tk):
         total_height = 10 * 300
         super().__init__(root, "Courses Menu", height=total_height)
@@ -223,7 +223,7 @@ class ApplyCourse(tk.Toplevel):
 
 if __name__ == "__main__":
     root = tk.Tk()
-    courses_menu = CoursesMenu(root)
+    courses_menu = CourseMenu(root)
     courses_menu.pack()
 
     eng = CourseBox(
