@@ -13,6 +13,7 @@ class DropDown(tk.Frame):
         label (bool, optional): Whether the dropdown menu should have a label. Defaults to False.
         label_text (str, optional): The text to be displayed on the label. Defaults to "Label".
         width (int, optional): The width of the dropdown menu. Defaults to 20.
+        disabled (bool, optional): Whether the dropdown menu should be disabled. Defaults to False.
     """
 
     def __init__(
@@ -22,6 +23,7 @@ class DropDown(tk.Frame):
         label: bool = False,
         label_text: str = "Label",
         width: int = 20,
+        disabled: bool = False,
     ):
         super().__init__(root)
 
@@ -32,7 +34,7 @@ class DropDown(tk.Frame):
             font=("Inter", 16),
             width=width,
             values=values,
-            state="readonly",
+            state="disabled" if disabled else "readonly",
         )
 
         if label:
@@ -41,14 +43,26 @@ class DropDown(tk.Frame):
         self._combobox.pack()
         self._combobox.current(0)
 
-    def get(self) -> str:
+    def get(self) -> Tuple[str, int]:
         """
-        Get the selected value from the dropdown menu.
+        Get the selected value and its index from the dropdown menu.
 
         Returns:
-            str: The selected value from the dropdown menu.
+            Tuple[str, int]: The selected value and its index from the dropdown menu.
         """
-        return self._combobox.get()
+        return self._combobox.get(), self._combobox.current()
+
+    def set(self, value: str):
+        """
+        Set the selected value of the dropdown menu.
+
+        Args:
+            value (str): The value to be selected.
+        """
+        self._combobox.set(value)
+
+    def set_index(self, value):
+        self._combobox.current(value)
 
 
 # # test code

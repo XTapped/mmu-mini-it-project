@@ -35,13 +35,22 @@ class DateEntry(tk.Frame):
         ]
 
         self._hours_list = [f"{str(hour).zfill(2)}00" for hour in range(8, 19, 2)]
+        self._short_hours_list = [f"{str(hour).zfill(2)}00" for hour in range(8, 17, 2)]
 
         self._label = tk.Label(
             self, text="Class Time (Day/Start Time/End Time)", font=("Inter", 16)
         )
         self._day = DropDown(self, self._days_list, width=10)
-        self._start_hour = DropDown(self, self._hours_list, width=10)
-        self._end_hour = DropDown(self, self._hours_list, width=10)
+        self._start_hour = DropDown(self, self._short_hours_list, width=10)
+        self._end_hour = DropDown(self, self._hours_list, width=10, disabled=True)
+
+        # bind an event to start hour dropdown menu to update the end hour dropdown menu when the start hour is changed
+        self._start_hour.bind(
+            "<FocusIn>",
+            lambda event: self._end_hour.set(
+                self._hours_list[self._start_hour.get()[1] + 1]
+            ),
+        )
 
         self._label.grid(sticky=tk.W, row=0, column=0, columnspan=3)
         self._day.grid(sticky=tk.W, row=1, column=0, padx=(0, 15))

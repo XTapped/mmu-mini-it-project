@@ -10,3 +10,5 @@ from .PasswordEntry import PasswordEntry
 from .RedButton import RedButton
 from .TextEntry import TextEntry
 from .WhiteButton import WhiteButton
+from .utils import execute_query
+from .utils import switch_frames

@@ -5,28 +5,46 @@ from modules import MMULeft
 from modules import Heading
 from modules import ScrollableFrame
 from modules import WhiteButton
+from modules import execute_query
 
 
 class CourseMenu(ScrollableFrame):
-    def __init__(self, root: tk.Tk):
+    def __init__(self, root: tk.Tk, back_frame, course_name, student):
         total_height = 10 * 300
         super().__init__(root, "Courses Menu", height=total_height)
 
         self.interior_backbutton = BackButton(
-            self.interior, None
+            self.interior, back_frame, current_frame=self
         )  # Add to interior frame
         self.interior_backbutton.pack()
 
         self.interior_mmuleft = MMULeft(self.interior)
         self.interior_mmuleft.pack()
 
-        self.interior_heading_1 = Heading(self.interior, "Foundation In IT", 1)
-        self.interior_heading_1.place(x=48, y=149)
+        self.content_frame = tk.Frame(self.interior)
+        self.content_frame.pack(pady=(150, 0), anchor="w", padx=(45, 0))
 
-        self.interior_heading_2 = Heading(self.interior, "Semester 3", 2)
-        self.interior_heading_2.place(x=48, y=210)
+        self.interior_heading_1 = Heading(self.content_frame, "Foundation In IT", 1)
+        self.interior_heading_1.pack(anchor="w")
 
-        self.interior.update_idletasks()
+        self.interior_heading_2 = Heading(self.content_frame, "Semester 3", 2)
+        self.interior_heading_2.pack(anchor="w")
+
+        self.course_container = tk.Frame(self.content_frame)
+        self.course_container.pack(anchor="w", pady=(30, 100))
+
+        classes = execute_query(
+            "SELECT name, code, description FROM Classes WHERE course_name=?",
+            (course_name,),
+        )
+        classes = [
+            (the_class[0], f"({the_class[1]})", the_class[2]) for the_class in classes
+        ]
+
+        for _class in classes:
+            CourseBox(
+                self.course_container, _class[0], _class[1], _class[2], student
+            ).pack(anchor="w", pady=(0, 20))
 
 
 class CourseBox(tk.Frame):
@@ -36,8 +54,11 @@ class CourseBox(tk.Frame):
         course_name: str,
         course_code: str,
         course_description: str,
+        student,
     ):
         super().__init__(root)
+        self.root = root
+        self.student = student
 
         # Create label for course name
         self.course_name = course_name
@@ -140,16 +161,16 @@ class CourseBox(tk.Frame):
         )  # Increment the dislike count
 
     def open_apply_window(self, course_name, course_code):
-        self.apply_window = ApplyCourse(course_name, course_code)
+        self.apply_window = ApplyCourse(
+            self.root, course_name, course_code, self.student, self
+        )
 
 
 class ApplyCourse(tk.Toplevel):
-    def __init__(
-        self,
-        course_name,
-        course_code,
-    ):
+    def __init__(self, root, course_name, course_code, student, course_box):
         super().__init__(root)
+        self.student = student
+        self.course_box = course_box
         self.title(f"Apply for {course_name} {course_code}")
         self.geometry("700x500")
 
@@ -157,21 +178,11 @@ class ApplyCourse(tk.Toplevel):
         self.heading_3.grid(row=0, column=0, columnspan=3, sticky="W")
 
         # Shared variable
-        self.selected_time = tk.StringVar()
+        self.selected_time = tk.IntVar()
 
-        # List of time options
-        time_options = [
-            "Monday (13:00-16:00) / Thursday (08:00-11:00)",
-            "Tuesday (16:00-19:00) / Wednesday (14:00-17:00)",
-            "Monday (08:00-11:00) / Wednesday (13:00-16:00)",
-            "Wednesday (16:00-19:00) / Friday (08:00-11:00)",
-        ]
-
-        # List of class location
-        class_location = ["CNMX1002", "CQAR3001", "CQCR2002", "CMNX1005"]
-
-        # List of class capacity
-        capacity_numbers = ["53/120", "30/120", "61/120", "101/120"]
+        section_options = self.get_section_options(
+            course_code.removeprefix("(").removesuffix(")")
+        )
 
         # Images for radiobutton
         self.img1 = tk.PhotoImage(file="assets/radiobutton_non_select.png")
@@ -180,13 +191,14 @@ class ApplyCourse(tk.Toplevel):
         self.profile_img = tk.PhotoImage(file="assets/capacity_blue.png")
 
         # Create RadioButton
-        for i, option in enumerate(time_options):
+        for i, option in enumerate(section_options):
             rb = tk.Radiobutton(
                 self,
-                text=option,
+                text=f"{option[0]}\n{option[1]}",
+                justify="left",
                 font=("inter", 15),
                 variable=self.selected_time,
-                value=option,
+                value=option[3],
                 image=self.img1,
                 selectimage=self.img2,
                 compound="left",
@@ -196,59 +208,71 @@ class ApplyCourse(tk.Toplevel):
             )
             rb.grid(row=i * 3 + 1, column=1, columnspan=2, sticky="W")
 
-            location = Heading(self, class_location[i], 6)
-            location.grid(row=i * 3 + 2, column=1, columnspan=1, sticky="W", padx=42)
-
             # Capacity image
             profile = tk.Label(self, image=self.profile_img)
             profile.grid(row=i * 3 + 3, column=1, sticky="W", padx=10)
 
             # Capacity number
             capacity = Heading(
-                self, capacity_numbers[i], 6, "#0750A4"
+                self, option[2], 6, "#0750A4"
             )  # replace 20 with your actual capacity value
             capacity.grid(row=i * 3 + 3, column=1, sticky="W", padx=30)
 
         # Apply button
         apply_button = WhiteButton(self, "Apply", command=self.apply)
         apply_button.grid(
-            row=len(time_options) * 3 + 1, column=0, columnspan=2, padx=5, sticky="W"
+            row=len(section_options) * 3 + 1, column=0, columnspan=2, padx=5, sticky="W"
         )
 
     # Apply button method
     def apply(self):
-        selected_time = self.selected_time.get()
+        selected_section_id = self.selected_time.get()
+        execute_query(
+            "INSERT INTO SectionEnrollment(student_id, section_id, semester) VALUES (?, ?, ?)",
+            (self.student[0], selected_section_id, self.student[2]),
+        )
         ApplyCourse.destroy(self)
+
+    def get_section_options(self, class_code):
+        query = """
+                    SELECT lecture_day || ' (' || lecture_start_time || ':00-' || lecture_end_time || ':00) / ' || tutorial_day || ' (' || tutorial_start_time || ':00-' || tutorial_end_time || ':00)', 
+                    lecture_venue || '/' || tutorial_venue, 
+                    (SELECT COUNT(*) FROM SectionEnrollment WHERE section_id = Sections.id) || '/' || capacity,
+                    id
+                    FROM Sections 
+                    WHERE class_code = ?
+                """
+        return execute_query(query, (class_code,))
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    courses_menu = CourseMenu(root)
+    courses_menu = CourseMenu(root, None, "Foundation in Information Technology")
     courses_menu.pack()
 
-    eng = CourseBox(
-        courses_menu.interior,
-        "Acadamic English",
-        "(PEN0065)",
-        "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
-    )
-    eng.place(x=48, y=270)
+    # eng = CourseBox(
+    #     courses_menu.interior,
+    #     "Acadamic English",
+    #     "(PEN0065)",
+    #     "Academic English is a course that aims to help students develop their academic writing and communication skills. This course covers topics such as grammar, vocabulary, style, structure, argumentation, citation, and plagiarism. Students will learn how to write different types of academic texts, such as essays, reports, reviews, and research papers. Students will also practice their oral presentation and discussion skills in various academic contexts. This course is suitable for students who want to improve their academic performance and prepare for further studies or professional careers.",
+    # )
+    # eng.place(x=48, y=270)
 
-    principles_of_physics = CourseBox(
-        courses_menu.interior,
-        "Principles of Physics",
-        "(PPP0101)",
-        "Principles of Physics is a course that introduces the fundamental concepts and methods of physics. It covers topics such as mechanics, thermodynamics, electromagnetism, optics, and quantum physics. This course aims to develop the students’ analytical and problem-solving skills, as well as their understanding of the physical world and its phenomena. This course also prepares the students for more advanced courses in physics and related fields. This course is suitable for students who have a strong background in mathematics and science, and who are interested in pursuing a career or further studies in physics or engineering.",
-    )
-    principles_of_physics.place(x=48, y=640)
+    # principles_of_physics = CourseBox(
+    #     courses_menu.interior,
+    #     "Principles of Physics",
+    #     "(PPP0101)",
+    #     "Principles of Physics is a course that introduces the fundamental concepts and methods of physics. It covers topics such as mechanics, thermodynamics, electromagnetism, optics, and quantum physics. This course aims to develop the students’ analytical and problem-solving skills, as well as their understanding of the physical world and its phenomena. This course also prepares the students for more advanced courses in physics and related fields. This course is suitable for students who have a strong background in mathematics and science, and who are interested in pursuing a career or further studies in physics or engineering.",
+    # )
+    # principles_of_physics.place(x=48, y=640)
 
-    mathematics_3 = CourseBox(
-        courses_menu.interior,
-        "Mathematics III",
-        "(PMT0301)",
-        "Mathematics III is a subject that covers advanced topics in mathematics, such as differential equations, linear algebra, complex analysis, and abstract algebra. This course aims to develop students’ mathematical skills and knowledge, as well as their ability to apply them to various fields of science and engineering. Students who take this course are expected to have a solid background in calculus, geometry, and algebra, and be familiar with basic concepts of logic and proof. Mathematics III is a challenging but rewarding subject that will prepare students for further studies or careers in mathematics and related disciplines.",
-    )
-    mathematics_3.place(x=48, y=1010)
+    # mathematics_3 = CourseBox(
+    #     courses_menu.interior,
+    #     "Mathematics III",
+    #     "(PMT0301)",
+    #     "Mathematics III is a subject that covers advanced topics in mathematics, such as differential equations, linear algebra, complex analysis, and abstract algebra. This course aims to develop students’ mathematical skills and knowledge, as well as their ability to apply them to various fields of science and engineering. Students who take this course are expected to have a solid background in calculus, geometry, and algebra, and be familiar with basic concepts of logic and proof. Mathematics III is a challenging but rewarding subject that will prepare students for further studies or careers in mathematics and related disciplines.",
+    # )
+    # mathematics_3.place(x=48, y=1010)
 
-    courses_menu.interior.update_idletasks()
+    # courses_menu.interior.update_idletasks()
     root.mainloop()

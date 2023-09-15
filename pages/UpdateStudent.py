@@ -10,9 +10,9 @@ from modules import RedButton
 
 class UpdateStudent(ScrollableFrame):
     # TODO: Remove all the Nones from the params
-    def __init__(self, root, back_frame=None):
+    def __init__(self, root, back_frame):
         super().__init__(root)
-        self._back_button = BackButton(self.interior, back_frame)
+        self._back_button = BackButton(self.interior, back_frame, current_frame=self)
         self._back_button.pack()
 
         self._mmu_logo = MMULeft(self.interior)
@@ -105,5 +105,5 @@ class _Student(tk.Frame):
 
 if __name__ == "__main__":
     root = tk.Tk()
-    UpdateStudent(root).pack()
+    UpdateStudent(root, None).pack()
     root.mainloop()
