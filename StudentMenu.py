@@ -1,12 +1,8 @@
 import tkinter as tk
-
-from modules.BackButton import BackButton
-from modules.MMULeft import MMULeft
-from modules.WhiteButton import WhiteButton
-from modules.Heading import Heading
-
-
-root = tk.Tk()
+from modules import BackButton
+from modules import MMULeft
+from modules import WhiteButton
+from modules import Heading
 
 
 class StudentMenu(tk.Frame):
@@ -41,7 +37,8 @@ class StudentMenu(tk.Frame):
         self.view_timetable_button.place(x=48, y=305)
 
 
-student_menu = StudentMenu(root, "Kubenthran Udayar")
-student_menu.pack()
-
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    student_menu = StudentMenu(root, "Kubenthran Udayar")
+    student_menu.pack()
+    root.mainloop()
