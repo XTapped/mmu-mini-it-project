@@ -148,74 +148,79 @@ class CourseBox(tk.Frame):
 
 class ApplyCourse(tk.Toplevel):
     def __init__(
-            self, 
-            course_name, 
-            course_code,
-        ):
-
+        self,
+        course_name,
+        course_code,
+    ):
         super().__init__(root)
         self.title(f"Apply for {course_name} {course_code}")
-        self.geometry("700x500") 
-        
+        self.geometry("700x500")
 
-        self.heading_3 = Heading(self,"Choose your preferred class times",4)
-        self.heading_3.grid(row=0,column=0,columnspan=3,sticky="W")
+        self.heading_3 = Heading(self, "Choose your preferred class times", 4)
+        self.heading_3.grid(row=0, column=0, columnspan=3, sticky="W")
 
-         # Shared variable
+        self.create_radio_buttons()
+
+        # Function to create and display radio buttons
+
+    def create_radio_buttons(self):
+        # Shared variable
         self.selected_time = tk.StringVar()
 
         # List of time options
-        time_options = ["Monday (13:00-16:00) / Thursday (08:00-11:00)",
-                        "Tuesday (16:00-19:00) / Wednesday (14:00-17:00)",
-                        "Monday (08:00-11:00) / Wednesday (13:00-16:00)",
-                        "Wednesday (16:00-19:00) / Friday (08:00-11:00)"]
-        
+        time_options = [
+            "Monday (13:00-16:00) / Thursday (08:00-11:00)",
+            "Tuesday (16:00-19:00) / Wednesday (14:00-17:00)",
+            "Monday (08:00-11:00) / Wednesday (13:00-16:00)",
+            "Wednesday (16:00-19:00) / Friday (08:00-11:00)",
+        ]
+
         # List of class location
-        class_location = ["CNMX1002","CQAR3001","CQCR2002","CMNX1005"]
-        
+        class_location = ["CNMX1002", "CQAR3001", "CQCR2002", "CMNX1005"]
+
         # List of class capacity
-        capacity_numbers = ["53/120","30/120","61/120","101/120"] 
-        
-        
+        capacity_numbers = ["53/120", "30/120", "61/120", "101/120"]
+
         # Images for radiobutton
         self.img1 = tk.PhotoImage(file="assets/radiobutton_non_select.png")
         self.img2 = tk.PhotoImage(file="assets/radiobutton_selected.png")
 
         self.profile_img = tk.PhotoImage(file="assets/capacity_blue.png")
 
-        # Create RadioButton 
+        # Create RadioButton
         for i, option in enumerate(time_options):
             rb = tk.Radiobutton(
                 self,
                 text=option,
-                font=("inter",15),
+                font=("inter", 15),
                 variable=self.selected_time,
                 value=option,
                 image=self.img1,
                 selectimage=self.img2,
-                compound='left',
+                compound="left",
                 borderwidth=0,
                 indicatoron=0,
-                padx=10
+                padx=10,
             )
-            rb.grid(row=i*3+1,column=1,columnspan=2,sticky="W")
-        
-            location = Heading(self,class_location[i],6)
-            location.grid(row=i*3+2, column=1, columnspan=1, sticky="W",padx=42)
+            rb.grid(row=i * 3 + 1, column=1, columnspan=2, sticky="W")
 
-            #Capacity image
+            location = Heading(self, class_location[i], 6)
+            location.grid(row=i * 3 + 2, column=1, columnspan=1, sticky="W", padx=42)
+
+            # Capacity image
             profile = tk.Label(self, image=self.profile_img)
-            profile.grid(row=i*3+3, column=1, sticky="W", padx=10)
+            profile.grid(row=i * 3 + 3, column=1, sticky="W", padx=10)
 
             # Capacity number
-            capacity = Heading(self,capacity_numbers[i],6,"#0750A4") # replace 20 with your actual capacity value
-            capacity.grid(row=i*3+3, column=1, sticky="W", padx=30)
-
+            capacity = Heading(self, capacity_numbers[i], 6, "#0750A4")
+            capacity.grid(row=i * 3 + 3, column=1, sticky="W", padx=30)
         # Apply button
-        apply_button = WhiteButton(self,"Apply",command=self.apply)
-        apply_button.grid(row=len(time_options)*3+1, column=0, columnspan=2,padx=5,sticky="W")
+        apply_button = WhiteButton(self, "Apply", command=self.apply)
+        apply_button.grid(
+            row=len(time_options) * 3 + 1, column=0, columnspan=2, padx=5, sticky="W"
+        )
 
-#Apply button method
+    # Apply button method
     def apply(self):
         selected_time = self.selected_time.get()
         ApplyCourse.destroy(self)
