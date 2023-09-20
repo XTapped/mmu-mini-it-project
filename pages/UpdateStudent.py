@@ -6,6 +6,7 @@ from modules import MMULeft
 from modules import Heading
 from modules import WhiteButton
 from modules import RedButton
+from modules import execute_query
 
 
 class UpdateStudent(ScrollableFrame):
@@ -21,13 +22,7 @@ class UpdateStudent(ScrollableFrame):
         self._student_container = tk.Frame(self.interior)
         self._student_container.pack(fill="x", pady=180, padx=50)
 
-        self._student_list = [
-            "Harris Majeed",
-            "Vinesh Sivaneswaran",
-            "Laxman Pillai",
-            "Kubenthran Udayar",
-            "Khiisyen Nair",
-        ]
+        self._student_list = execute_query("SELECT name, id FROM Students")
         self._student_widget_list = []
 
         self._column_num = 1
@@ -36,13 +31,15 @@ class UpdateStudent(ScrollableFrame):
                 self._row_num = index // 2
             self._column_num = 0 if self._column_num == 1 else 1
 
-            widget = _Student(self._student_container, student, index, self.regrid)
+            widget = _Student(self._student_container, student[0], index, self.regrid)
             widget.grid(
                 row=self._row_num, column=self._column_num, padx=(0, 50), pady=(0, 50)
             )
             self._student_widget_list.append(widget)
 
     def regrid(self, list_pos):
+        victim_student_id = self._student_list[list_pos][1]
+        execute_query("DELETE FROM Students WHERE id=?", (victim_student_id,))
         self._student_list.pop(list_pos)
 
         for widget in self._student_widget_list:
@@ -56,7 +53,7 @@ class UpdateStudent(ScrollableFrame):
                 self._row_num = index // 2
             self._column_num = 0 if self._column_num == 1 else 1
 
-            widget = _Student(self._student_container, student, index, self.regrid)
+            widget = _Student(self._student_container, student[0], index, self.regrid)
             widget.grid(
                 row=self._row_num, column=self._column_num, padx=(0, 50), pady=(0, 50)
             )

@@ -1,9 +1,12 @@
 import tkinter as tk
 from typing import *
+from modules import switch_frames
 from modules import MMULeft
 from modules import BackButton
 from modules import Heading
 from modules import WhiteButton
+
+from pages.CreateCourse import CreateCourse
 
 
 class CourseAction(tk.Frame):
@@ -13,6 +16,8 @@ class CourseAction(tk.Frame):
         root.title("Course Action")
         root.geometry("800x500")
         root.resizable(False, False)
+
+        self.create_course = CreateCourse(root, self)
 
         back_button = BackButton(self, back_frame, current_frame=self)
         back_button.pack()
@@ -24,7 +29,14 @@ class CourseAction(tk.Frame):
         heading3.pack()
         heading3.place(x=48, y=149)
 
-        create_course = WhiteButton(self, "Create Course", None, 19, "2", "w")
+        create_course = WhiteButton(
+            self,
+            "Create Course",
+            lambda: switch_frames(self, self.create_course),
+            19,
+            "2",
+            "w",
+        )
         create_course.pack(anchor="w")
         create_course.place(x=48, y=200)
 

@@ -23,6 +23,7 @@ class DateEntry(tk.Frame):
     def __init__(
         self,
         root: tk.Tk,
+        class_type: str = "Class",
     ):
         super().__init__(root)
 
@@ -38,7 +39,9 @@ class DateEntry(tk.Frame):
         self._short_hours_list = [f"{str(hour).zfill(2)}00" for hour in range(8, 17, 2)]
 
         self._label = tk.Label(
-            self, text="Class Time (Day/Start Time/End Time)", font=("Inter", 16)
+            self,
+            text=f"{class_type} Time (Day/Start Time/End Time)",
+            font=("Inter", 16),
         )
         self._day = DropDown(self, self._days_list, width=10)
         self._start_hour = DropDown(self, self._short_hours_list, width=10)

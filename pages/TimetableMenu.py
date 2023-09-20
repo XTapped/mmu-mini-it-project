@@ -117,24 +117,27 @@ class TimetableMenu(tk.Frame):
         }
 
         # Create the rest of the cells
-        for i in range(1, 6):
-            for j in range(1, 6):
-                the_class = class_dict.get((j, i))
-                if the_class is None:
-                    text = ""
-                else:
-                    text = f"{the_class[0]}\n{the_class[1]}"
+        def create_other_cells():
+            for i in range(1, 6):
+                for j in range(1, 6):
+                    the_class = class_dict.get((j, i))
+                    if the_class is None:
+                        text = ""
+                    else:
+                        text = f"{the_class[0]}\n{the_class[1]}"
 
-                cell = Heading(
-                    self._content_frame,
-                    text=text,
-                    width=9,
-                    height=2,
-                    heading=6,
-                    highlightbackground="black",
-                    highlightthickness=1,
-                )
-                cell.grid(row=i, column=j)
+                    cell = Heading(
+                        self._content_frame,
+                        text=text,
+                        width=9,
+                        height=2,
+                        heading=6,
+                        highlightbackground="black",
+                        highlightthickness=1,
+                    )
+                    cell.grid(row=i, column=j)
+
+        create_other_cells()
 
 
 if __name__ == "__main__":
